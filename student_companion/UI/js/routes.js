@@ -1,4 +1,4 @@
-var studentCompanionApp = angular.module('studentCompanionApp', ['ui.router']);
+var studentCompanionApp = angular.module('studentCompanionApp');
 
 studentCompanionApp.config(function($stateProvider, $urlRouterProvider) {
     
@@ -24,7 +24,8 @@ studentCompanionApp.config(function($stateProvider, $urlRouterProvider) {
 
         .state('flashcards', {
             url: '/flashcards',
-            templateUrl: 'views/flashcards.html'
+            templateUrl: 'views/flashcards.html',
+            controller: 'flashcardCtrl',
         })
 
         .state('flashcards.view', {
