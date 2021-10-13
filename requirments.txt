@@ -1,1 +1,6 @@
+pip install Django
+pip install djangorestframework
 pip install django-spa
+
+
+Setup DB connection
