@@ -1,9 +1,9 @@
 var studentCompanionApp = angular.module('studentCompanionApp');
 studentCompanionApp.config(function(RestangularProvider) {
     RestangularProvider.setBaseUrl('http://localhost:8000/api/');
- });
+});
 
- studentCompanionApp.factory('apiService', ['Restangular', function(Restangular){
+studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) {
 
     // this is service object with list of methods in it
     // this object will be used by controller
@@ -11,19 +11,23 @@ studentCompanionApp.config(function(RestangularProvider) {
 
     var service = {
         getTestModels: getTestModels,
-        getTestModel: getTestModel
+        getTestModel: getTestModel,
+        getDeckNames: getDeckNames
     };
 
     // get examples from server by using Restangular
-    function getTestModels(){
+    function getTestModels() {
         return Restangular.all('test').getList();
     }
 
     // get example with given id from server by using Restangular
-    function getTestModel(id){
+    function getTestModel(id) {
         return Restangular.one('test', id).get();
     }
 
+    function getDeckNames() {
+        return Restangular.all('decks').getList();
+    }
     return service;
 
 }]);

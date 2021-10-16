@@ -1,5 +1,5 @@
-from api.models import TestModel
-from api.serializers import TestModelSerializer
+from api.models import FlashDeck, TestModel
+from api.serializers import FlashDeckSerializer, TestModelSerializer
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -37,3 +37,20 @@ class TestModelDetail(APIView):
         obj = self.get_object(pk)
         serializer = TestModelSerializer(obj)
         return Response(serializer.data)
+
+class DeckModelList(APIView):
+    """
+    List all snippets, or create a new snippet.
+    """
+    def get(self, request, format=None):
+        objects  = FlashDeck.objects.all()
+        serializer = FlashDeckSerializer(objects, many=True)
+        return Response(serializer.data)
+
+    # def post(self, request, format=None):
+    #     serializer = TestModelSerializer(data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
