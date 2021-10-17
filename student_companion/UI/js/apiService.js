@@ -17,6 +17,7 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
         getUserDetails: getUserDetails,
         addFriend: addFriend,
         getFriends: getFriends,
+        getLeaderboard: getLeaderboard,
     };
 
     // get examples from server by using Restangular
@@ -47,6 +48,10 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
 
     function getFriends(params){
         return Restangular.one('friends').customGET("list", {})
+    }
+
+    function getLeaderboard(params){
+        return Restangular.one('leaderboard').customGET("", params)
     }
 
     

@@ -21,7 +21,8 @@ studentCompanionApp.config(function($stateProvider, $urlRouterProvider) {
 
         .state('leaderboard', {
             url: '/leaderboard',
-            templateUrl: 'views/leaderboard.html'
+            templateUrl: 'views/leaderboard.html',
+            controller: 'leaderboardCtrl',
         })
 
         .state('flashcards', {
