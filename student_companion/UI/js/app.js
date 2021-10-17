@@ -1,4 +1,4 @@
-var studentCompanionApp = angular.module('studentCompanionApp', ['ui.router', 'restangular']);
+var studentCompanionApp = angular.module('studentCompanionApp');
 
 
 

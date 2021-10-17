@@ -19,6 +19,7 @@ class User(models.Model):
     user_type = models.CharField(max_length=100, blank=False, default='normal')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
+    relations = models.ManyToManyField("User", blank = True)
     
     class Meta:
         ordering= ['created_at']
@@ -35,7 +36,8 @@ class FlashDeck(models.Model):
 
 
 class UserRelation(models.Model):
-    related_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ManyToManyField(User, related_name = 'owner')
+    friends_of_owner = models.ManyToManyField(User, related_name = 'friends_of_owner')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
 
