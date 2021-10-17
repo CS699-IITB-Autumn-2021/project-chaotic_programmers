@@ -9,12 +9,14 @@ studentCompanionApp.config(function($stateProvider, $urlRouterProvider) {
         // HOME STATES AND NESTED VIEWS ========================================
         .state('home', {
             url: '/home',
-            templateUrl: 'views/home.html'
+            templateUrl: 'views/home.html',
+            controller: 'indexCtrl',
         })
 
         .state('friends', {
             url: '/friends',
-            templateUrl: 'views/friends.html'
+            templateUrl: 'views/friends.html',
+            controller: 'friendsCtrl',
         })
 
         .state('leaderboard', {

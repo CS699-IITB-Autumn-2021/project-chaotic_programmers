@@ -12,7 +12,11 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
     var service = {
         getTestModels: getTestModels,
         getTestModel: getTestModel,
-        getDeckNames: getDeckNames
+        getDeckNames: getDeckNames,
+        getCurrentUser: getCurrentUser,
+        getUserDetails: getUserDetails,
+        addFriend: addFriend,
+        getFriends: getFriends,
     };
 
     // get examples from server by using Restangular
@@ -28,6 +32,24 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
     function getDeckNames() {
         return Restangular.all('decks').getList();
     }
+
+    function getCurrentUser(){
+        return Restangular.one('get_logged_in_user').get()
+    }
+
+    function getUserDetails(params){
+        return Restangular.one('user').customGET("", params)
+    }
+
+    function addFriend(params){
+        return Restangular.one('friends').customPOST(params, 'new/')
+    }
+
+    function getFriends(params){
+        return Restangular.one('friends').customGET("list", {})
+    }
+
+    
     return service;
 
 }]);
