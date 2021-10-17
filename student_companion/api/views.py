@@ -1,10 +1,14 @@
-from api.models import FlashDeck, TestModel, User, UserRelation
+from typing import get_type_hints
+from api.models import FlashDeck, TestModel, User, UserRelation, ActivityMonitor
 from api.serializers import FlashDeckSerializer, TestModelSerializer, UserSerializer
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from api.lib import get_logged_in_user
+import datetime
+import dateutil.relativedelta
+from django.db.models import Sum
 
 
 class TestModelList(APIView):
@@ -120,3 +124,57 @@ class FriendList(APIView):
         objects  = current_user.relations.all()
         serializer = UserSerializer(objects, many=True)
         return Response(serializer.data)
+
+class LeaderboardList(APIView):
+
+    def get_start_date(self, period):
+        now = datetime.datetime.now()
+        if period == 'Last 1 Month':
+            return now + dateutil.relativedelta.relativedelta(months=-1)
+        elif period == 'Last 7 Days':
+            return now + dateutil.relativedelta.relativedelta(days=-7)
+        elif period == 'Last 1 day':
+            return now + dateutil.relativedelta.relativedelta(days=-1)
+        return now
+
+    def get_user_ids(self):
+        all_ids = []
+        current_user = current_user = get_logged_in_user()
+        all_ids.append(current_user.id)
+        friend_ids = list(current_user.relations.all().values_list('id', flat=True))
+        all_ids += friend_ids
+        return all_ids
+
+    def get_order_criteria(self, criteria):
+        if(criteria == 'Cards Revised'):
+            return "-total_cards"
+        else:
+            return "-total_time"
+
+    def get(self, request, format=None):
+        
+        criteria = request.query_params.get('criteria')
+        period = request.query_params.get('period')
+
+
+        print("\n\n\n\\n\n\n")
+        print(criteria, period)
+        all_ids = self.get_user_ids()
+        start_date = self.get_start_date(period)
+        order = self.get_order_criteria(criteria)
+
+        print("start_date: ", start_date)
+        print("ids: ", all_ids)
+        print("order: ", order)
+        query_set = ActivityMonitor.objects.filter(user_id_id__in = all_ids, date__date__gt = start_date).values('user_id').annotate(total_time = Sum('time_spent'), total_cards = Sum('cards_seen')).order_by(order)
+        result_set = []
+        for result in query_set:
+            data = {}
+            user = User.objects.get(pk = result['user_id'])
+            data['username'] = user.username
+            data['total_time'] = result['total_time'] 
+            data['total_cards'] = result['total_cards'] 
+            result_set.append(data)
+        return Response(result_set)
+
+    
