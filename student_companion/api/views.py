@@ -52,12 +52,32 @@ class DeckModelList(APIView):
         serializer = FlashDeckSerializer(objects, many=True)
         return Response(serializer.data)
 
+
     # def post(self, request, format=None):
-    #     serializer = TestModelSerializer(data=request.data)
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
-    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    #      print(request.data)
+    #     #  serializer = TestModelSerializer(data=request.data)
+    #     #  if serializer.is_valid():
+    #     #      serializer.save()
+    #     #      return Response(serializer.data, status=status.HTTP_201_CREATED)
+    #     #  return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class DeckManager(APIView):
+    """
+    List all snippets, or create a new snippet.
+    """
+    # def get(self, request, format=None):
+    #     objects  = FlashDeck.objects.all()
+    #     serializer = FlashDeckSerializer(objects, many=True)
+    #     return Response(serializer.data)
+
+
+    def post(self, request, format=None):
+        print(request.data)
+        serializer = FlashDeckSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LoggedinUserDetail(APIView):

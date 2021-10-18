@@ -88,6 +88,7 @@ WSGI_APPLICATION = 'student_companion.wsgi.application'
 #         'HOST': 'localhost',
 #     }
 # }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
