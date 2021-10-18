@@ -18,6 +18,7 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
         addFriend: addFriend,
         getFriends: getFriends,
         getLeaderboard: getLeaderboard,
+        createDeck: createDeck,
     };
 
     // get examples from server by using Restangular
@@ -34,27 +35,30 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
         return Restangular.all('decks').getList();
     }
 
-    function getCurrentUser(){
+    function getCurrentUser() {
         return Restangular.one('get_logged_in_user').get()
     }
 
-    function getUserDetails(params){
+    function getUserDetails(params) {
         return Restangular.one('user').customGET("", params)
     }
 
-    function addFriend(params){
+    function addFriend(params) {
         return Restangular.one('friends').customPOST(params, 'new/')
     }
 
-    function getFriends(params){
+    function getFriends(params) {
         return Restangular.one('friends').customGET("list", {})
     }
 
-    function getLeaderboard(params){
+    function getLeaderboard(params) {
         return Restangular.one('leaderboard').customGET("", params)
     }
 
-    
+    function createDeck(params) {
+        return Restangular.one('decks').customPOST(params, "new/")
+    }
+
     return service;
 
 }]);
