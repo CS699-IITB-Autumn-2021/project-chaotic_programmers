@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from api.models import TestModel
+from api.models import Flashcard, TestModel
 from api.models import FlashDeck
 from api.models import User
 
@@ -11,7 +11,13 @@ class TestModelSerializer(serializers.ModelSerializer):
 class FlashDeckSerializer(serializers.ModelSerializer):
     class Meta:
         model = FlashDeck
-        fields = ['id', 'title', 'owner_id', 'created_at', 'updated_at']
+        fields = ['id', 'title', 'owner_id']
+
+
+class FlashCardSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Flashcard
+        fields = ['id', 'title', 'question','answer','owner_id','flash_deck_id']
 
 
 class UserSerializer(serializers.ModelSerializer):

@@ -7,7 +7,7 @@
     <ul class="dropdown-menu">
         <li><a class="dropdown-item"  data-toggle="modal" data-target="#createDeckModal">Create New Deck</a></li>
         <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#" ng-model="deck_name" ng-repeat="eachdeck in decks" ng-click="selectedDeckFromDropDown()" data-toggle="collapse" data-target="#ShowFlashCard">{{eachdeck.title}}</a></li>
+        <li><a class="dropdown-item" href="#" ng-model="deck_name" ng-repeat="eachdeck in decks track by $index" ng-click="selectedDeckFromDropDown($index)" data-toggle="collapse" data-target="#ShowFlashCard">{{eachdeck.title}}</a></li>
     </ul>
 
 <!-- Modal -->
@@ -59,7 +59,7 @@
         <a class="nav-link" href="#" data-toggle="collapse" data-target="#CreateFlashCard">New Card</a>
       </li>
     </ul> 
-    <h5 class="card-title">Title</h5>
+    <h5 class="card-title" >Title</h5>
   </div>
   <div class="card-body">
     <h5 class="card-title">Front</h5>
@@ -92,21 +92,21 @@
     </ul>
   </div>
   <div class="card-body">
-     <form>
-     <input class="form-control" type="text" placeholder="Title of Flashcard">
+     <form >
+     <input class="form-control" type="text" placeholder="Title of Flashcard" ng-model="new_fcard_title">
      </br>
 <div class="form-group">
     <label for="exampleFormControlTextarea1">Front</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" ng-model="new_fcard_front"></textarea>
   </div> 
   
   <div class="card-body">
     <h5 class="card-title">Back</h5>
     <div class="form-group">
     <label for="exampleFormControlTextarea1">Back</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" ng-model="new_fcard_back"></textarea>
   </div>
-  <a href="#" class="btn btn-success">Save</a>
+  <a href="#" class="btn btn-success" ng-click="newFlashCard()">Save</a>
   </form>
   </div>
 </div>
