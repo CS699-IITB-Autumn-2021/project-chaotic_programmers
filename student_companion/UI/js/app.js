@@ -1,6 +1,5 @@
 var studentCompanionApp = angular.module('studentCompanionApp');
 
-deckName: ""
 
 studentCompanionApp.controller('flashcardCtrl', ['$scope', 'apiService', function($scope, apiService) {
 
@@ -23,9 +22,7 @@ studentCompanionApp.controller('flashcardCtrl', ['$scope', 'apiService', functio
     $scope.saveDeck = function() {
         var params = {
             title: $scope.new_deck_name,
-            owner_id: 1,
-            created_at: '2021-10-10',
-            updated_at: '2021-10-10'
+            owner_id: 1
         }
         apiService.createDeck(params).then(function(response) {
             toastr.success("New Deck Created", 'Success');
@@ -36,11 +33,23 @@ studentCompanionApp.controller('flashcardCtrl', ['$scope', 'apiService', functio
     }
 
 
-    $scope.selectedDeckFromDropDown = function() {
-
-        deckName: $scope.deck_name
-
+    $scope.selectedDeckFromDropDown = function(index) {
+        console.log($scope.decks[index]);
+        $scope.curr_deck_id = $scope.decks[index].id
     }
 
-
+    $scope.newFlashCard = function() {
+        var params = {
+            title: $scope.new_fcard_title,
+            question: $scope.new_fcard_front,
+            answer: $scope.new_fcard_front,
+            owner_id: 1,
+            flash_deck_id: $scope.curr_deck_id
+        }
+        apiService.createCard(params).then(function(response) {
+            toastr.success("New Card Created", 'Success');
+        }, function(response) {
+            toastr.error("Please try again later.", 'Failed to create flashcard');
+        });
+    }
 }])

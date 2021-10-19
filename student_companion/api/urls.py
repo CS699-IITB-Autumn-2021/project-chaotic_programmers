@@ -11,4 +11,5 @@ urlpatterns = [
     path('/friends/new/',views.FriendDetail.as_view()),
     path('/friends/list/',views.FriendList.as_view()),
     path('/leaderboard/',views.LeaderboardList.as_view()),
+    path('/card/new/',views.NewFlashCardList.as_view()),
 ]

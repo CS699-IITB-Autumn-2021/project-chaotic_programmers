@@ -1,6 +1,6 @@
 from typing import get_type_hints
 from api.models import FlashDeck, TestModel, User, UserRelation, ActivityMonitor
-from api.serializers import FlashDeckSerializer, TestModelSerializer, UserSerializer
+from api.serializers import FlashCardSerializer, FlashDeckSerializer, TestModelSerializer, UserSerializer
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -74,6 +74,24 @@ class DeckManager(APIView):
     def post(self, request, format=None):
         print(request.data)
         serializer = FlashDeckSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class NewFlashCardList(APIView):
+    """
+    List all snippets, or create a new snippet.
+    """
+    # def get(self, request, format=None):
+    #     objects  = FlashDeck.objects.all()
+    #     serializer = FlashDeckSerializer(objects, many=True)
+    #     return Response(serializer.data)
+
+
+    def post(self, request, format=None):
+        print(request.data)
+        serializer = FlashCardSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -197,4 +215,3 @@ class LeaderboardList(APIView):
             result_set.append(data)
         return Response(result_set)
 
-    
