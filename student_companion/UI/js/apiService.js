@@ -20,6 +20,7 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
         getLeaderboard: getLeaderboard,
         createDeck: createDeck,
         createCard: createCard,
+        fetchCardsofDeck: fetchCardsofDeck,
     };
 
     // get examples from server by using Restangular
@@ -62,6 +63,10 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
 
     function createCard(params) {
         return Restangular.one('card').customPOST(params, "new/")
+    }
+
+    function fetchCardsofDeck(params) {
+        return Restangular.all('card').customGET("", params);
     }
 
     return service;

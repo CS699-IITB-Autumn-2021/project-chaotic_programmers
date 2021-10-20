@@ -1,5 +1,5 @@
 from typing import get_type_hints
-from api.models import FlashDeck, TestModel, User, UserRelation, ActivityMonitor
+from api.models import FlashDeck, Flashcard, TestModel, User, UserRelation, ActivityMonitor
 from api.serializers import FlashCardSerializer, FlashDeckSerializer, TestModelSerializer, UserSerializer
 from django.http import Http404
 from rest_framework.views import APIView
@@ -60,6 +60,18 @@ class DeckModelList(APIView):
     #     #      serializer.save()
     #     #      return Response(serializer.data, status=status.HTTP_201_CREATED)
     #     #  return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ExistingFlashCardsList(APIView):
+    """
+    List all snippets, or create a new snippet.
+    """
+    def get(self, request, format=None):
+        # print(request.GET.get('owner_id', ''))
+        objects  = Flashcard.objects.filter(owner_id=request.GET.get('owner_id', ''),flash_deck_id=request.GET.get('flash_deck_id', ''))
+        serializer = FlashCardSerializer(objects, many=True)
+        return Response(serializer.data)
+
+
 
 class DeckManager(APIView):
     """
