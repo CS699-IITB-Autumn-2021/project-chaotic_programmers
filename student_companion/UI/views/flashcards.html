@@ -59,6 +59,10 @@
         <a class="nav-link" href="#" data-toggle="collapse" data-target="#CreateFlashCard">New Card</a>
       </li>
     </ul> 
+    </br>
+   <div class="progress" style="height: 10px;">
+  <div class="progress-bar bg-success" role="progressbar" ng-style="displayPercentage" aria-valuenow={{cards_revised_percentage}} aria-valuemin="0" aria-valuemax="100">{{cards_revised_percentage}}%</div>
+</div>
     <h5 class="card-title" >{{cardsofDeck[current_card_index].title}}</h5>
   </div>
   <div class="card-body">
@@ -71,7 +75,7 @@
   <div class="card-body">
     <h5 class="card-title">Back</h5>
     <p class="card-text">{{cardsofDeck[current_card_index].answer}}</p>
-    <a href="#" class="btn btn-success" ng-click="shownextCard()">EASY</a>
+    <a href="#" class="btn btn-success" ng-click="shownextCard();displayPercentage={'width': cards_revised_percentage + '%'}">EASY</a>
     <a href="#" class="btn btn-warning" ng-click="shownextCard()">MEDIUM</a>
     <a href="#" class="btn btn-danger" ng-click="shownextCard()">HARD</a>
   </div>
@@ -91,7 +95,9 @@
       </li>
     </ul>
   </div>
+  
   <div class="card-body">
+  
      <form >
      <input class="form-control" type="text" placeholder="Title of Flashcard" ng-model="new_fcard_title">
      </br>

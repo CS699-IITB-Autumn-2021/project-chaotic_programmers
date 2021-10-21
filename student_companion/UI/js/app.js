@@ -19,6 +19,11 @@ studentCompanionApp.controller('flashcardCtrl', ['$scope', 'apiService', functio
         $scope.decks = response;
     });
 
+    $scope.reloadDecks = function() {
+        apiService.getDeckNames().then(function(response) {
+            $scope.decks = response;
+        });
+    }
     $scope.saveDeck = function() {
         var params = {
             title: $scope.new_deck_name,
@@ -26,10 +31,10 @@ studentCompanionApp.controller('flashcardCtrl', ['$scope', 'apiService', functio
         }
         apiService.createDeck(params).then(function(response) {
             toastr.success("New Deck Created", 'Success');
+            $scope.reloadDecks();
         }, function(response) {
             toastr.error("Please try again later.", 'Failed to create deck');
         });
-
     }
 
 
@@ -42,10 +47,12 @@ studentCompanionApp.controller('flashcardCtrl', ['$scope', 'apiService', functio
         }
         apiService.fetchCardsofDeck(params).then(function(response) {
             $scope.cardsofDeck = response;
+            $scope.size_of_today_deck = $scope.cardsofDeck.length;
+            console.log($scope.size_of_today_deck)
         });
         $scope.current_card_index = 0;
+        $scope.cards_revised_percentage = 0;
         console.log($scope.current_card_index);
-        console.log($scope.cardsofDeck)
     }
 
     $scope.newFlashCard = function() {
@@ -63,6 +70,8 @@ studentCompanionApp.controller('flashcardCtrl', ['$scope', 'apiService', functio
         });
     }
     $scope.shownextCard = function() {
-        $scope.current_card_index = $scope.current_card_index + 1
+        $scope.current_card_index = $scope.current_card_index + 1;
+        $scope.cards_revised_percentage = $scope.current_card_index / $scope.size_of_today_deck * 100;
+        console.log($scope.cards_revised_percentage)
     }
 }])
