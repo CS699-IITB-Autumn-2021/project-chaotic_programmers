@@ -19,6 +19,11 @@ studentCompanionApp.controller('flashcardCtrl', ['$scope', 'apiService', functio
         $scope.decks = response;
     });
 
+    $scope.reloadDecks = function() {
+        apiService.getDeckNames().then(function(response) {
+            $scope.decks = response;
+        });
+    }
     $scope.saveDeck = function() {
         var params = {
             title: $scope.new_deck_name,
@@ -26,10 +31,10 @@ studentCompanionApp.controller('flashcardCtrl', ['$scope', 'apiService', functio
         }
         apiService.createDeck(params).then(function(response) {
             toastr.success("New Deck Created", 'Success');
+            $scope.reloadDecks();
         }, function(response) {
             toastr.error("Please try again later.", 'Failed to create deck');
         });
-
     }
 
 
