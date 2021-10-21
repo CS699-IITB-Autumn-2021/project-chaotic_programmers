@@ -42,10 +42,12 @@ studentCompanionApp.controller('flashcardCtrl', ['$scope', 'apiService', functio
         }
         apiService.fetchCardsofDeck(params).then(function(response) {
             $scope.cardsofDeck = response;
+            $scope.size_of_today_deck = $scope.cardsofDeck.length;
+            console.log($scope.size_of_today_deck)
         });
         $scope.current_card_index = 0;
+        $scope.cards_revised_percentage = 0;
         console.log($scope.current_card_index);
-        console.log($scope.cardsofDeck)
     }
 
     $scope.newFlashCard = function() {
@@ -63,6 +65,8 @@ studentCompanionApp.controller('flashcardCtrl', ['$scope', 'apiService', functio
         });
     }
     $scope.shownextCard = function() {
-        $scope.current_card_index = $scope.current_card_index + 1
+        $scope.current_card_index = $scope.current_card_index + 1;
+        $scope.cards_revised_percentage = $scope.current_card_index / $scope.size_of_today_deck * 100;
+        console.log($scope.cards_revised_percentage)
     }
 }])
