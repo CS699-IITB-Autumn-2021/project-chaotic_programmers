@@ -62,4 +62,7 @@ studentCompanionApp.controller('flashcardCtrl', ['$scope', 'apiService', functio
             toastr.error("Please try again later.", 'Failed to create flashcard');
         });
     }
+    $scope.shownextCard = function() {
+        $scope.current_card_index = $scope.current_card_index + 1
+    }
 }])
