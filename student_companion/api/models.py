@@ -20,7 +20,7 @@ class ScUser(AbstractUser):
 
 class FlashDeck(models.Model):
     title = models.CharField(max_length=100, blank=False, default='')
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=CASCADE)
+    owner_id = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     
@@ -32,7 +32,7 @@ class Flashcard(models.Model):
     title = models.CharField(max_length=100, blank = False, default='')
     question = models.CharField(max_length=100, blank = False, default='')
     answer = models.CharField(max_length=100, blank = False, default='')
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    owner_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     flash_deck_id = models.ForeignKey(FlashDeck, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
