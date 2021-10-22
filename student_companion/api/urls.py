@@ -1,9 +1,8 @@
 from django.urls import path
+from rest_framework.authtoken.views import obtain_auth_token 
 from api import views
 
 urlpatterns = [
-    path('/test/', views.TestModelList.as_view()),
-    path('/test/<int:pk>/', views.TestModelDetail.as_view()),
     path('/decks/',views.DeckModelList.as_view()),
     path('/decks/new/',views.DeckManager.as_view()),
     path('/get_logged_in_user/',views.LoggedinUserDetail.as_view()),
@@ -13,4 +12,7 @@ urlpatterns = [
     path('/leaderboard/',views.LeaderboardList.as_view()),
     path('/card/new/',views.NewFlashCardList.as_view()),
     path('/card/',views.ExistingFlashCardsList.as_view()),
+    path('/login/', views.CustomAuthToken.as_view(), name='api_token_auth'),
+    path('/register/', views.RegisterView.as_view(), name='auth_register'),
+    path('/logout/', views.Logout.as_view()),
 ]

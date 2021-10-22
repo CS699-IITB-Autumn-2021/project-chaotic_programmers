@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Student Companion</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" ui-sref="profile.home">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" ui-sref="profile.friends">Friends</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" ui-sref="profile.leaderboard">LeaderBoard</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" ui-sref="profile.flashcards" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          FlashCards
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" ui-sref="profile.flashcards.new">Create</a>
+          <a class="dropdown-item" ui-sref="profile.flashcards.view">View</a>
+        </div>
+      </li>
+    
+      <li class="nav-item dropdown" ng-if="user">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{user.firstName}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" ng-click="logout()">Logout</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div ui-view> </div>

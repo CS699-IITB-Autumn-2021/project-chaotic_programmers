@@ -4,18 +4,13 @@ var studentCompanionApp = angular.module('studentCompanionApp');
 
 studentCompanionApp.controller('friendsCtrl', ['$scope', 'apiService', '$uibModal', function($scope, apiService, $uibModal) {
 
-    $scope.searchOptions = ['username', 'email_id']
+    $scope.searchOptions = ['username', 'email']
+    console.log($scope.loggedIn)
 
     $scope.searchFilter = ""
     $scope.searchQuery = ""
     $scope.searchStatusSuccess = true
             
-    apiService.getCurrentUser().then(function(response) {
-        $scope.user = response;
-        
-        console.log(toastr)
-    });
-
     apiService.getFriends().then(function(response) {
         $scope.friends = response;
         
@@ -32,7 +27,6 @@ studentCompanionApp.controller('friendsCtrl', ['$scope', 'apiService', '$uibModa
 
         console.log(params, $scope.searchFilter)
         apiService.getUserDetails(params).then(function(response) {
-            $scope.friend = response
             $scope.searchStatusSuccess = true
             $scope.friend = response
             $scope.open('lg', response)

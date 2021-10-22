@@ -1,33 +1,26 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from rest_framework.authtoken.models import Token
+from django.conf import settings
+from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
-# Create your models here.
-class TestModel(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now_add=True)
-    question = models.CharField(max_length=100, blank=True, default='')
-    answer = models.CharField(max_length=100, blank=True, default='')
+# This code is triggered whenever a new user has been created and saved to the database
+@receiver(post_save, sender = settings.AUTH_USER_MODEL)
+def create_auth_token(sender, instance = None, created = False, **kwargs):
+    if created:
+        Token.objects.create(user = instance)
 
-    class Meta:
-        ordering = ['created_at']
 
-class User(models.Model):
-    name = models.CharField(max_length=100, blank=False, default='')
-    email_id = models.EmailField()
-    username = models.CharField(max_length=100, blank=False, default='')
-    password = models.CharField(max_length=1000, blank=False, default='')
-    user_type = models.CharField(max_length=100, blank=False, default='normal')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now_add=True)
-    relations = models.ManyToManyField("User", blank = True)
-    
-    class Meta:
-        ordering= ['created_at']
+class ScUser(AbstractUser):
+    relations = models.ManyToManyField(settings.AUTH_USER_MODEL, blank = True)
 
 
 class FlashDeck(models.Model):
     title = models.CharField(max_length=100, blank=False, default='')
-    owner_id = models.ForeignKey(User,on_delete=CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     
@@ -35,18 +28,11 @@ class FlashDeck(models.Model):
         ordering= ['title']
 
 
-class UserRelation(models.Model):
-    owner = models.ManyToManyField(User, related_name = 'owner')
-    friends_of_owner = models.ManyToManyField(User, related_name = 'friends_of_owner')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now_add=True)
-
-
 class Flashcard(models.Model):
     title = models.CharField(max_length=100, blank = False, default='')
     question = models.CharField(max_length=100, blank = False, default='')
     answer = models.CharField(max_length=100, blank = False, default='')
-    owner_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     flash_deck_id = models.ForeignKey(FlashDeck, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
@@ -54,7 +40,7 @@ class Flashcard(models.Model):
 
 class FlashcardUser(models.Model):
     flashcard_id = models.ForeignKey(Flashcard, on_delete=models.CASCADE)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     last_opened = models.DateTimeField()
     last_time_taken = models.IntegerField()
     next_scheduled_at = models.DateTimeField()
@@ -62,10 +48,18 @@ class FlashcardUser(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
 
-class ActivityMonitor(models.Model):
-    date = models.DateTimeField()
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    time_spent = models.IntegerField()
-    cards_seen = models.IntegerField()
+
+class FlashDeckUser(models.Model):
+    flashdeck = models.ForeignKey(FlashDeck, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
+
+class ActivityMonitor(models.Model):
+    date = models.DateTimeField()
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    time_spent = models.IntegerField(default=0)
+    cards_seen = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
+
