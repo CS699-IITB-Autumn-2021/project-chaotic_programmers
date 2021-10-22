@@ -1,6 +1,15 @@
 var studentCompanionApp = angular.module('studentCompanionApp');
 studentCompanionApp.config(function(RestangularProvider) {
     RestangularProvider.setBaseUrl('http://localhost:8000/api/');
+    stored = localStorage.getItem('token');
+    console.log('stored is', stored)
+    if(stored){
+        stored_json = JSON.parse(stored)
+        token = stored_json.token
+        value = "Token "+ token
+        RestangularProvider.setDefaultHeaders({'Authorization': value});
+    }
+    
 });
 
 studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) {
@@ -21,6 +30,9 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
         createDeck: createDeck,
         createCard: createCard,
         fetchCardsofDeck: fetchCardsofDeck,
+        loginUser: loginUser,
+        registerUser: registerUser,
+        logoutUser: logoutUser,
     };
 
     // get examples from server by using Restangular
@@ -67,6 +79,18 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
 
     function fetchCardsofDeck(params) {
         return Restangular.all('card').customGET("", params);
+    }
+
+    function loginUser(params) {
+        return Restangular.one('login/').customPOST(params, "")
+    }
+
+    function registerUser(params) {
+        return Restangular.one('register/').customPOST(params, "")
+    }
+
+    function logoutUser() {
+        return Restangular.one('logout/').customPOST("", "")
     }
 
     return service;

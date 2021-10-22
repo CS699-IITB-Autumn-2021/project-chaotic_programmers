@@ -1,9 +1,16 @@
 var studentCompanionApp = angular.module('studentCompanionApp');
 
-console.log('from friends')
-studentCompanionApp.directive('searchFriends', function() {
+console.log('from directive')
+studentCompanionApp.directive('profile', function() {
     return {
-      templateUrl: 'view/flahscards_view.html'
+      templateUrl: 'views/profile.html'
+    };
+  });
+
+
+  studentCompanionApp.directive('login', function() {
+    return {
+      templateUrl: 'views/login/index.html'
     };
   });
   
