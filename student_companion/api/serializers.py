@@ -13,13 +13,13 @@ from django.contrib.auth import get_user_model
 class FlashDeckSerializer(serializers.ModelSerializer):
     class Meta:
         model = FlashDeck
-        fields = ['id', 'title', 'owner_id']
+        fields = ['id', 'title']
 
 
 class FlashCardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Flashcard
-        fields = ['id', 'title', 'question','answer','owner_id','flash_deck_id']
+        fields = ['id', 'title', 'question','answer']
 
 
 class UserSerializer(serializers.ModelSerializer):

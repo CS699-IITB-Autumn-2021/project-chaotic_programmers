@@ -1,6 +1,6 @@
 from typing import get_type_hints
 from django.conf import settings
-from api.models import FlashDeck, Flashcard, ActivityMonitor, ScUser
+from api.models import FlashDeck, Flashcard, ActivityMonitor, ScUser, FlashDeckUser, FlashcardUser
 from api.serializers import FlashCardSerializer, FlashDeckSerializer, UserSerializer
 from django.http import Http404
 from rest_framework.views import APIView
@@ -21,6 +21,8 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.permissions import AllowAny
 
 from django.contrib.auth import get_user_model
+
+
 
 
 class RegisterView(generics.CreateAPIView):
@@ -65,7 +67,7 @@ class DeckModelList(APIView):
     List all snippets, or create a new snippet.
     """
     def get(self, request, format=None):
-        objects  = FlashDeck.objects.all()
+        objects  = FlashDeck.objects.filter(owner = request.user)
         serializer = FlashDeckSerializer(objects, many=True)
         return Response(serializer.data)
 
@@ -83,8 +85,9 @@ class ExistingFlashCardsList(APIView):
     List all snippets, or create a new snippet.
     """
     def get(self, request, format=None):
-        # print(request.GET.get('owner_id', ''))
-        objects  = Flashcard.objects.filter(owner_id=request.GET.get('owner_id', ''),flash_deck_id=request.GET.get('flash_deck_id', ''))
+        deck_id = request.query_params.get('deck_id')
+        flashdeck = FlashDeck.objects.get(pk = deck_id)
+        objects  = Flashcard.objects.filter(owner=request.user, flash_deck = flashdeck)
         serializer = FlashCardSerializer(objects, many=True)
         return Response(serializer.data)
 
@@ -102,11 +105,16 @@ class DeckManager(APIView):
 
     def post(self, request, format=None):
         print(request.data)
-        serializer = FlashDeckSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        deck_title = request.data['title']
+        deck = FlashDeck(title = deck_title, owner = request.user)
+        deck.save()
+        deck_user = FlashDeckUser(flashdeck = deck , user = request.user)
+        deck_user.save()
+        return Response(status=status.HTTP_201_CREATED)
+        # if serializer.is_valid():
+        #     serializer.save()
+            
+        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class NewFlashCardList(APIView):
     """
@@ -120,11 +128,23 @@ class NewFlashCardList(APIView):
 
     def post(self, request, format=None):
         print(request.data)
-        serializer = FlashCardSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        card_title = request.data['title']
+        card_question = request.data['question']
+        card_answer = request.data['answer']
+        deck_id = request.data['deck_id']
+        
+        now = datetime.datetime.now()
+        flashdeck = FlashDeck.objects.get(pk = deck_id)
+        flashcard = Flashcard(title = card_title, question = card_question, answer = card_answer, flash_deck = flashdeck, owner = request.user)
+        flashcard.save()
+
+        flashcard_user = FlashcardUser(flashcard = flashcard, user = request.user)
+        flashcard_user.save()
+        return Response(status=status.HTTP_201_CREATED)
+        # if serializer.is_valid():
+        #     serializer.save()
+        #     return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LoggedinUserDetail(APIView):

@@ -78,7 +78,7 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
     }
 
     function fetchCardsofDeck(params) {
-        return Restangular.all('card').customGET("", params);
+        return Restangular.one('card').customGET("", params);
     }
 
     function loginUser(params) {

@@ -65,8 +65,26 @@ studentCompanionApp.config(function($stateProvider, $urlRouterProvider) {
             controller: 'registerCtrl',
         })
 
+        .state('profile.flashdecks', {
+            url: '/flashdecks',
+            templateUrl: 'views/flashdeck.html',
+            controller: 'flashdeckCtrl',
+        })
 
 
+        .state('profile.flashdeck_show', {
+            url: '/flashdeck_show?id',
+            params:      {'id': null},
+            templateUrl: 'views/flashdecks_show.html',
+            controller: 'flashdeckShowCtrl',
+        })
+
+        .state('profile.flashcard_show', {
+            url: '/flashcard_show?flashcard_id',
+            params:      {'flashcard_id': null},
+            templateUrl: 'views/flashcards_show.html',
+            controller: 'flashcardShowCtrl',
+        })
         
         
 });
