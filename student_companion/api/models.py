@@ -41,9 +41,9 @@ class Flashcard(models.Model):
 class FlashcardUser(models.Model):
     flashcard = models.ForeignKey(Flashcard, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    last_opened = models.DateTimeField()
-    last_time_taken = models.IntegerField()
-    next_scheduled_at = models.DateTimeField()
+    last_opened = models.DateTimeField(blank = True, null= True)
+    last_time_taken = models.IntegerField(blank = True, null = True)
+    next_scheduled_at = models.DateTimeField(blank = True, null= True)
     status = models.CharField(max_length=10, blank = False, default='active')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)

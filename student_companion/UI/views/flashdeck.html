@@ -1,0 +1,51 @@
+
+<div>
+
+        
+        <!-- <button ng-click="createDeck()"> New Deck</button> -->
+
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            New Deck
+          </button>
+          
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Create New Deck</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" name="" class="form-control input_user" value="" placeholder="Enter Deck name" ng-model="deckName">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveDeck()">Create</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+        <h3> Existing Decks</h3>
+        <table class="table table-hover text-centre table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>S. No</th>
+                    <th> Title</th>
+                    <th> Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat = "deck in decks track by $index">
+                    <td>{{$index + 1}}</td>
+                    <td>{{deck.title}}</td>
+                    <td><a ng-click="viewDeck(deck.id)">View</a></td>
+                </tr>
+            </tbody>
+        </table>
+</div>
