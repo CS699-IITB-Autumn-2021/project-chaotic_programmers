@@ -20,7 +20,7 @@ class ScUser(AbstractUser):
 
 class FlashDeck(models.Model):
     title = models.CharField(max_length=100, blank=False, default='')
-    owner_id = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     
@@ -32,14 +32,14 @@ class Flashcard(models.Model):
     title = models.CharField(max_length=100, blank = False, default='')
     question = models.CharField(max_length=100, blank = False, default='')
     answer = models.CharField(max_length=100, blank = False, default='')
-    owner_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    flash_deck_id = models.ForeignKey(FlashDeck, on_delete=models.CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    flash_deck = models.ForeignKey(FlashDeck, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
 
 
 class FlashcardUser(models.Model):
-    flashcard_id = models.ForeignKey(Flashcard, on_delete=models.CASCADE)
+    flashcard = models.ForeignKey(Flashcard, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     last_opened = models.DateTimeField()
     last_time_taken = models.IntegerField()
