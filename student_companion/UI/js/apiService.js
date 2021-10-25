@@ -37,7 +37,9 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
         SaveStartCard: SaveStartCard,
         SaveFinishCard: SaveFinishCard,
         deleteCard: deleteCard,
+        shareDeckToFriend: shareDeckToFriend,
     };
+
 
     // get examples from server by using Restangular
     function getTestModels() {
@@ -112,6 +114,11 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
     function logoutUser() {
         return Restangular.one('logout/').customPOST("", "")
     }
+
+    function shareDeckToFriend(params) {
+        return Restangular.one('sharedeck/').customPOST(params, '')
+    }
+
 
     return service;
 

@@ -27,9 +27,29 @@ studentCompanionApp.controller('flashdeckCtrl', ['$scope', 'apiService', '$uibMo
         $state.go("profile.flashdeck_show", { id: deck_id })
     }
 
+    $scope.shareDeck = function(deck_id){
+        console.log('here at parent')
+        $scope.open("lg", deck_id)
+    }
+
+    $scope.open = function (size, deck_id) {
+
+        
+        var modalInstance = $uibModal.open({
+            animation: false,
+            templateUrl: 'share_deck.html',
+            controller: 'shareDeckCtrl',
+            size: size,
+            resolve: {
+                deck: function () {
+                    return deck_id;
+                },
+            }
+        });
+    
+    };
+
     $scope.getDecks()
-
-
 
 }])
 
@@ -88,3 +108,41 @@ studentCompanionApp.controller('flashcardShowCtrl', ['$scope', 'apiService', '$u
 
     console.log($stateParams)
 }])
+
+
+
+studentCompanionApp.controller('shareDeckCtrl', ['$scope', 'apiService', '$modalInstance', 'deck','$window', function($scope, apiService, $modalInstance, deck, $window) {
+
+  
+    console.log('form share')
+    $scope.deckId = deck
+    
+
+    $scope.ok = function () {
+        $modalInstance.dismiss('cancel');
+        $scope.share()
+    };
+  
+    $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
+    };
+
+    apiService.getFriends().then(function(response) {
+        $scope.friends = response;
+    });
+
+    $scope.share = function(){
+        var params = {
+            friend_id : $scope.friend_id,
+            deck_id : $scope.deckId
+        }
+        console.log(params)
+        apiService.shareDeckToFriend(params).then(function(response) {
+            toastr.success("Added to friend list", 'Success');
+          }, function(response) {
+            toastr.error("No such user/ friend already added", 'Failed to add friend');
+          });
+
+    }
+
+  }]);
