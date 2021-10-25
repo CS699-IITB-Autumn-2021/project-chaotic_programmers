@@ -1,12 +1,9 @@
 
 <div>
 
-        
-        <!-- <button ng-click="createDeck()"> New Deck</button> -->
 
 
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            New Deck
+        <button type="button" class="fas fa-folder-plus fa-lg" data-toggle="modal" data-target="#exampleModal"> New
           </button>
           
           <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -30,26 +27,22 @@
           </div>
 
 
+          <h3 style="text-align: center; padding-top: 1%; padding-bottom: 1%;"> Existing Decks</h3>
+          <p style="text-align: center;" ng-if="decks && decks.length < 1">You currently don't have any decks </p>
+          <div class="container">
+              <main class="grid">
+                <article ng-repeat="deck in decks  track by $index">
+                  <div class="text">
+                    <h3>{{deck.title}}</h3>
+                    <p> {{friend.username}}</p>
+                    <a class="far fa-eye" ng-click="viewDeck(deck.id)">View</a>
+                    <a class="fas fa-share-alt" ng-click="shareDeck(deck.id)">Share</a>
+                  </div>
+                </article>
+                
+              </main>
+            </div>
 
-        <h3> Existing Decks</h3>
-        <table class="table table-hover text-centre table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th>S. No</th>
-                    <th> Title</th>
-                    <th> Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat = "deck in decks track by $index">
-                    <td>{{$index + 1}}</td>
-                    <td>{{deck.title}}</td>
-                    <td><a ng-click="viewDeck(deck.id)">View</a>
-                      <a ng-click="shareDeck(deck.id)">Share</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
 </div>
 
 
