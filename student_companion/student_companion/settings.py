@@ -80,25 +80,25 @@ WSGI_APPLICATION = 'student_companion.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'student_companion',
-#         'USER': 'django',   
-#         'PASSWORD': 'student',
-#         'HOST': 'localhost',
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'student_companion',
-        'USER': 'root',   
+        'USER': 'django',   
         'PASSWORD': 'student',
-        'HOST': '',
+        'HOST': 'localhost',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'student_companion',
+#         'USER': 'root',   
+#         'PASSWORD': 'student',
+#         'HOST': '',
+#     }
+# }
 
 
 # Password validation

@@ -1,6 +1,6 @@
 from django.conf import settings
 from rest_framework import serializers
-from api.models import Flashcard
+from api.models import ActivityMonitor, Flashcard, FlashcardUser
 from api.models import FlashDeck
 from api.models import ScUser
 from rest_framework import serializers
@@ -20,6 +20,17 @@ class FlashCardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Flashcard
         fields = ['id', 'title', 'question','answer']
+
+class FlashCardUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FlashcardUser
+        fields = ['id', 'last_opened', 'last_time_taken','next_scheduled_at']
+
+class ActivityMonitorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ActivityMonitor
+        fields = ['id', 'date', 'user_id','time_spent','cards_seen']
+
 
 
 class UserSerializer(serializers.ModelSerializer):

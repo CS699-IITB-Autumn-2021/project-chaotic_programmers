@@ -1,11 +1,11 @@
 from typing import get_type_hints
 from django.conf import settings
 from api.models import FlashDeck, Flashcard, ActivityMonitor, ScUser, FlashDeckUser, FlashcardUser
-from api.serializers import FlashCardSerializer, FlashDeckSerializer, UserSerializer
+from api.serializers import ActivityMonitorSerializer, FlashCardSerializer, FlashCardUserSerializer, FlashDeckSerializer, UserSerializer
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import serializers, status
 from api.lib import get_logged_in_user
 import datetime
 import dateutil.relativedelta
@@ -91,8 +91,81 @@ class ExistingFlashCardsList(APIView):
         serializer = FlashCardSerializer(objects, many=True)
         return Response(serializer.data)
 
+class GetTodaysRevisionFlashCardforDeck(APIView):
+    
+    def get(self, request, format=None):
+        deck_id = request.query_params.get('deck_id')
+        flashdeck = FlashDeck.objects.get(pk = deck_id)
+        objects  = Flashcard.objects.filter(owner=request.user, flash_deck = flashdeck)
+        serializer = FlashCardSerializer(objects, many=True)
+        returnlist=[]
+        for row in serializer.data:
+            flashcard_id=list(row.values())[0]
+            # print(flashcard_id)
+            objects1 = FlashcardUser.objects.filter(flashcard = flashcard_id,user=request.user)
+            serializer1 = FlashCardUserSerializer(objects1, many=True)
+            # print(serializer1.data)
+            # if(list(serializer1.data[-1].values())[-1]!=None):
+            #     print(datetime.datetime.strptime(list(serializer1.data[-1].values())[-1],"%Y-%m-%dT%H:%M:%S.%fZ"))
+            # print(datetime.datetime.now())
+            if(list(serializer1.data[-1].values())[-1]==None or datetime.datetime.strptime(list(serializer1.data[-1].values())[-1],"%Y-%m-%dT%H:%M:%S.%fZ")<=datetime.datetime.utcnow()):
+                returnlist.append(row)
+        print(returnlist)
+        return Response(returnlist)
 
+class SaveStart(APIView):
+    def post(self, request, format=None): 
+        objects1 = FlashcardUser.objects.filter(flashcard = request.data['flashcard_id'],user=request.user)
+        serializer1 = FlashCardUserSerializer(objects1, many=True)    
+        last_time_taken=list(serializer1.data[-1].values())[2] 
+        if last_time_taken==None:
+            last_time_taken=0
+        last_opened=list(serializer1.data[-1].values())[1] 
+        flashcard_user = FlashcardUser(flashcard_id = request.data['flashcard_id'], user = request.user,next_scheduled_at=datetime.datetime.now(),last_time_taken=last_time_taken,last_opened=last_opened,)
+        flashcard_user.save()
+        return Response(status=status.HTTP_201_CREATED)
 
+class SaveFinish(APIView):
+    def post(self, request, format=None):
+        objects1 = FlashcardUser.objects.filter(flashcard = request.data['flashcard_id'],user=request.user)
+        serializer1 = FlashCardUserSerializer(objects1, many=True)
+        id_of_flashcarduser=list(serializer1.data[-1].values())[0]
+        start_time=datetime.datetime.strptime(list(serializer1.data[-1].values())[-1],"%Y-%m-%dT%H:%M:%S.%fZ")
+        end_time=datetime.datetime.now()
+        difficulty=request.data['difficulty']
+        alpha=0.5
+        curr_time_taken=(end_time-start_time).seconds
+        if(curr_time_taken>300):
+            curr_time_taken=300
+        last_time_taken=alpha*list(serializer1.data[-1].values())[2]+(1-alpha)*curr_time_taken
+        now=datetime.datetime.utcnow()
+        last_opened=list(serializer1.data[-1].values())[1]
+        if last_opened==None:
+            afterAminute=(now+dateutil.relativedelta.relativedelta(minutes=1))
+            gap_in_revision=afterAminute-now
+        else:
+            gap_in_revision=now-datetime.datetime.strptime(last_opened,"%Y-%m-%dT%H:%M:%S.%fZ")
+        
+        penalty=(300-curr_time_taken)/300
+        gap3days=dateutil.relativedelta.relativedelta(days=(3+int(penalty*7)))
+        gap7days=dateutil.relativedelta.relativedelta(days=(7+int(penalty*14)))
+        gap14days=dateutil.relativedelta.relativedelta(days=(14+int(penalty*30)))
+        if(difficulty==1):
+            next_scheduled_at=now+gap_in_revision+gap14days
+            print(next_scheduled_at)
+        elif difficulty==2:
+            next_scheduled_at=now+gap_in_revision+gap7days
+        else:
+            next_scheduled_at=now+gap_in_revision+gap3days
+        FlashcardUser.objects.filter(pk=id_of_flashcarduser).update(last_opened=datetime.datetime.now(),last_time_taken=last_time_taken,next_scheduled_at=next_scheduled_at,)
+        # flashcard_user = FlashcardUser(flashcard_id = request.data['flashcard_id'], user = request.user,last_opened=datetime.datetime.now(),last_time_taken=last_time_taken,next_scheduled_at=next_scheduled_at,)
+        # flashcard_user.save()
+        activity_objects = ActivityMonitor.objects.filter(user=request.user)
+        activity_serializer = ActivityMonitorSerializer(activity_objects, many=True)
+        ActivityMonitor.objects.filter(pk=list(activity_serializer.data[-1].values())[0]).update(time_spent=curr_time_taken,cards_seen=list(activity_serializer.data[-1].values())[4]+1,)
+        return Response(status=status.HTTP_201_CREATED)
+
+        
 class DeckManager(APIView):
     """
     List all snippets, or create a new snippet.

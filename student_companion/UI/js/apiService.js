@@ -3,13 +3,13 @@ studentCompanionApp.config(function(RestangularProvider) {
     RestangularProvider.setBaseUrl('http://localhost:8000/api/');
     stored = localStorage.getItem('token');
     console.log('stored is', stored)
-    if(stored){
+    if (stored) {
         stored_json = JSON.parse(stored)
         token = stored_json.token
-        value = "Token "+ token
-        RestangularProvider.setDefaultHeaders({'Authorization': value});
+        value = "Token " + token
+        RestangularProvider.setDefaultHeaders({ 'Authorization': value });
     }
-    
+
 });
 
 studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) {
@@ -33,6 +33,9 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
         loginUser: loginUser,
         registerUser: registerUser,
         logoutUser: logoutUser,
+        fetchTodaysCardsofDeck: fetchTodaysCardsofDeck,
+        SaveStartCard: SaveStartCard,
+        SaveFinishCard: SaveFinishCard,
     };
 
     // get examples from server by using Restangular
@@ -77,8 +80,20 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
         return Restangular.one('card').customPOST(params, "new/")
     }
 
+    function SaveStartCard(params) {
+        return Restangular.one('card').customPOST(params, "savestart/")
+    }
+
+    function SaveFinishCard(params) {
+        return Restangular.one('card').customPOST(params, "savefinish/")
+    }
+
     function fetchCardsofDeck(params) {
         return Restangular.one('card').customGET("", params);
+    }
+
+    function fetchTodaysCardsofDeck(params) {
+        return Restangular.one('card').customGET("revise/", params);
     }
 
     function loginUser(params) {
