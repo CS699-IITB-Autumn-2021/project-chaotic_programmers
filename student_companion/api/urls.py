@@ -11,6 +11,7 @@ urlpatterns = [
     path('/friends/list/',views.FriendList.as_view()),
     path('/leaderboard/',views.LeaderboardList.as_view()),
     path('/card/new/',views.NewFlashCardList.as_view()),
+    path('/card/delete/',views.DeleteFlashCard.as_view()),
     path('/card/',views.ExistingFlashCardsList.as_view()),
     path('/card/revise/',views.GetTodaysRevisionFlashCardforDeck.as_view()),
     path('/login/', views.CustomAuthToken.as_view(), name='api_token_auth'),
