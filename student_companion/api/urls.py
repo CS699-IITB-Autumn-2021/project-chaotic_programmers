@@ -19,4 +19,5 @@ urlpatterns = [
     path('/logout/', views.Logout.as_view()),
     path('/card/savestart/',views.SaveStart.as_view()),
     path('/card/savefinish/',views.SaveFinish.as_view()),
+    path('/sharedeck/', views.shareFlashdeck.as_view()),
 ]

@@ -359,3 +359,29 @@ class LeaderboardList(APIView):
             result_set.append(data)
         return Response(result_set)
 
+class shareFlashdeck(APIView):
+    """
+    Retrieve, update or delete a snippet instance.
+    """
+    def post(self, request, format=None):
+        deck_id = request.data['deck_id']
+        friend_user_id = request.data['friend_id']
+
+        friend = ScUser.objects.get(username = friend_user_id)
+        deck_cpy = FlashDeck.objects.get(pk = deck_id)
+        
+        #copy deck to new object
+        deck_cpy.id = None
+        deck_cpy.owner = friend
+        deck_cpy.save()
+
+        old_deck = FlashDeck.objects.get(pk = deck_id)
+
+        for card in old_deck.flashcard_set.all():
+            flashcard = Flashcard(title = card.title, question = card.question, answer = card.answer, flash_deck = deck_cpy, owner = friend)
+            flashcard.save()
+
+            flashcard_user = FlashcardUser(flashcard = flashcard, user = friend)
+            flashcard_user.save()
+        return Response(status=status.HTTP_201_CREATED)
+

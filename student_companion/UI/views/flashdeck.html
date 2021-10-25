@@ -44,8 +44,30 @@
                 <tr ng-repeat = "deck in decks track by $index">
                     <td>{{$index + 1}}</td>
                     <td>{{deck.title}}</td>
-                    <td><a ng-click="viewDeck(deck.id)">View</a></td>
+                    <td><a ng-click="viewDeck(deck.id)">View</a>
+                      <a ng-click="shareDeck(deck.id)">Share</a>
+                    </td>
                 </tr>
             </tbody>
         </table>
 </div>
+
+
+<script type="text/ng-template" id="share_deck.html">
+  <div class="modal-header">
+      <h3 class="modal-title">Choose friend</h3>
+  </div>
+  <div class="modal-body">
+    <div class="input-group  input-group-sm">
+      <label class="input-group-text" for="searchFilter">Username: </label>
+      <select class="form-select" ng-model="friend_id" id ="searchFilter">
+          <option ng-repeat="x in friends">{{x.username}}</option>
+      </select>
+    </div>
+      
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-primary" type="button" ng-click="ok()">Yes</button>
+      <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+  </div>
+</script>
