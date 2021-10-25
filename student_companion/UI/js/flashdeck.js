@@ -5,13 +5,28 @@ var studentCompanionApp = angular.module('studentCompanionApp');
 studentCompanionApp.controller('flashdeckCtrl', ['$scope', 'apiService', '$uibModal', '$state', function($scope, apiService, $uibModal, $state) {
 
     $scope.saveDeck = function() {
+        custom_required = 0
+        const deck_ids = []
+        if ($scope.custom_selected) {
+            custom_required = 1
+            $scope.decks.forEach(function(eachdeck) {
+                if (eachdeck.selected) {
+                    if (eachdeck != '') {
+                        deck_ids.push(eachdeck.id)
+                    }
+                }
+            });
+            console.log(deck_ids);
+        }
         var params = {
-            title: $scope.deckName
+            title: $scope.deckName,
+            custom_required: custom_required,
+            deck_ids: deck_ids
         }
         apiService.createDeck(params).then(function(response) {
             toastr.success("New Deck Created", 'Success');
-            $scope.getDecks()
-                // $scope.reloadDecks();
+            $scope.getDecks();
+            // $scope.reloadDecks();
         }, function(response) {
             toastr.error("Please try again later.", 'Failed to create deck');
         });
