@@ -1,7 +1,7 @@
 from typing import get_type_hints
 from django.conf import settings
 from api.models import FlashDeck, Flashcard, ActivityMonitor, ScUser, FlashDeckUser, FlashcardUser
-from api.serializers import FlashCardSerializer, FlashCardUserSerializer, FlashDeckSerializer, UserSerializer
+from api.serializers import ActivityMonitorSerializer, FlashCardSerializer, FlashCardUserSerializer, FlashDeckSerializer, UserSerializer
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -129,6 +129,7 @@ class SaveFinish(APIView):
     def post(self, request, format=None):
         objects1 = FlashcardUser.objects.filter(flashcard = request.data['flashcard_id'],user=request.user)
         serializer1 = FlashCardUserSerializer(objects1, many=True)
+        id_of_flashcarduser=list(serializer1.data[-1].values())[0]
         start_time=datetime.datetime.strptime(list(serializer1.data[-1].values())[-1],"%Y-%m-%dT%H:%M:%S.%fZ")
         end_time=datetime.datetime.now()
         difficulty=request.data['difficulty']
@@ -156,8 +157,12 @@ class SaveFinish(APIView):
             next_scheduled_at=now+gap_in_revision+gap7days
         else:
             next_scheduled_at=now+gap_in_revision+gap3days
-        flashcard_user = FlashcardUser(flashcard_id = request.data['flashcard_id'], user = request.user,last_opened=datetime.datetime.now(),last_time_taken=last_time_taken,next_scheduled_at=next_scheduled_at,)
-        flashcard_user.save()
+        FlashcardUser.objects.filter(pk=id_of_flashcarduser).update(last_opened=datetime.datetime.now(),last_time_taken=last_time_taken,next_scheduled_at=next_scheduled_at,)
+        # flashcard_user = FlashcardUser(flashcard_id = request.data['flashcard_id'], user = request.user,last_opened=datetime.datetime.now(),last_time_taken=last_time_taken,next_scheduled_at=next_scheduled_at,)
+        # flashcard_user.save()
+        activity_objects = ActivityMonitor.objects.filter(user=request.user)
+        activity_serializer = ActivityMonitorSerializer(activity_objects, many=True)
+        ActivityMonitor.objects.filter(pk=list(activity_serializer.data[-1].values())[0]).update(time_spent=curr_time_taken,cards_seen=list(activity_serializer.data[-1].values())[4]+1,)
         return Response(status=status.HTTP_201_CREATED)
 
         
