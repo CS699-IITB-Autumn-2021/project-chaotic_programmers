@@ -1,13 +1,5 @@
-<div class="container"> 
-    <div class="row"> 
-        <div class="card">
-            <div class="card-body">
-               <p> Track your friend's progress here..!</p>
-            </div>
-        </div>
-
-    </div>
-
+<h3 style="text-align: center; padding-top: 1%; padding-bottom: 1%;">Top performers</h3>
+<div class="container">
     <div class="row"> 
         <div class="col-6">
             <div class="input-group  input-group-sm">
@@ -31,9 +23,10 @@
 
     <div class="row"> 
         <div>
-            <table class="table table-hover text-centre table-bordered">
+            <table class="table table-hover table-striped text-centre table-bordered table-dark">
                 <thead class="thead-dark">
                     <tr>
+                        <th> Rank</th>
                         <th>Username</th>
                         <th> Cards seen</th>
                         <th> Revision Time(in secs)</th>
@@ -41,6 +34,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat = "entry in leaderboard track by $index">
+                        <td> {{$index + 1}}</td>
                         <td>{{entry.username}}</td>
                         <td>{{entry.total_cards}}</td>
                         <td>{{entry.total_time}}</td>

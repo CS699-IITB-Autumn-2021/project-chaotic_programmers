@@ -1,5 +1,6 @@
 from typing import get_type_hints
 from django.conf import settings
+from django.db.models.expressions import RawSQL
 from api.models import FlashDeck, Flashcard, ActivityMonitor, ScUser, FlashDeckUser, FlashcardUser
 from api.serializers import ActivityMonitorSerializer, FlashCardSerializer, FlashCardUserSerializer, FlashDeckSerializer, UserSerializer
 from django.http import Http404
@@ -288,10 +289,14 @@ class FriendDetail(APIView):
             raise Http404
         current_user = request.user
         new_user = ScUser.objects.get(id = friend_user_id)
-        current_user.relations.add(new_user)
-        current_user.save()
-        serializer = UserSerializer(current_user)
-        return Response(serializer.data)
+        friend_ids = list(current_user.relations.all().values_list('id', flat=True))
+        if new_user.id not in friend_ids:
+            current_user.relations.add(new_user)
+            current_user.save()
+            serializer = UserSerializer(current_user)
+            return Response(serializer.data)
+        else:
+            raise Http404
 
 class FriendList(APIView):
     """

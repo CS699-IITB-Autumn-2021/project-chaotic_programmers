@@ -26,7 +26,7 @@ studentCompanionApp.controller('registerCtrl', ['$scope', 'apiService', '$uibMod
             toastr.success("You were registered", 'Success');
             $state.go('public.login')
           }, function(response) {
-            toastr.error("Try again later !!", 'Registration Failed!');
+            toastr.error("Please check the data entered!!", 'Registration Failed!');
           });
     }
 

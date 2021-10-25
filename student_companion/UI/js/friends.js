@@ -5,6 +5,7 @@ var studentCompanionApp = angular.module('studentCompanionApp');
 studentCompanionApp.controller('friendsCtrl', ['$scope', 'apiService', '$uibModal', function($scope, apiService, $uibModal) {
 
     $scope.searchOptions = ['username', 'email']
+    $scope.searchFilter = $scope.searchOptions[0]
     console.log($scope.loggedIn)
 
     $scope.searchFilter = ""
@@ -66,7 +67,7 @@ studentCompanionApp.controller('friendsCtrl', ['$scope', 'apiService', '$uibModa
 }])
 
 // studentCompanionApp.controller('ModalInstanceCtrl', function ($scope, $modalInstance, friend, currentUser) {
-studentCompanionApp.controller('addFriendCtrl', ['$scope', 'apiService', '$modalInstance', 'friend', 'currentUser', function($scope, apiService, $modalInstance, friend, currentUser) {
+studentCompanionApp.controller('addFriendCtrl', ['$scope', 'apiService', '$modalInstance', 'friend', 'currentUser','$window', function($scope, apiService, $modalInstance, friend, currentUser, $window) {
 
   
     $scope.friend = friend
@@ -87,8 +88,9 @@ studentCompanionApp.controller('addFriendCtrl', ['$scope', 'apiService', '$modal
         }
         apiService.addFriend(params).then(function(response) {
             toastr.success("Added to friend list", 'Success');
+            $window.location.reload();
           }, function(response) {
-            toastr.error("Please try again later.", 'Failed to add friend');
+            toastr.error("No such user/ friend already added", 'Failed to add friend');
           });
 
     }
