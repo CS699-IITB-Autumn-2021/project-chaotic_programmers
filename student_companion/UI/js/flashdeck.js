@@ -51,7 +51,6 @@ studentCompanionApp.controller('flashdeckCtrl', ['$scope', 'apiService', '$uibMo
 
     $scope.getDecks()
 
-
 }])
 
 
