@@ -36,6 +36,7 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
         fetchTodaysCardsofDeck: fetchTodaysCardsofDeck,
         SaveStartCard: SaveStartCard,
         SaveFinishCard: SaveFinishCard,
+        deleteCard: deleteCard,
     };
 
     // get examples from server by using Restangular
@@ -86,6 +87,10 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
 
     function SaveFinishCard(params) {
         return Restangular.one('card').customPOST(params, "savefinish/")
+    }
+
+    function deleteCard(params) {
+        return Restangular.one('card').customPOST(params, "delete/")
     }
 
     function fetchCardsofDeck(params) {
