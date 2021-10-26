@@ -72,7 +72,7 @@ studentCompanionApp.controller('flashcardCtrl', ['$scope', 'apiService', functio
             $scope.current_card_index = 0;
             $scope.cards_revised_percentage = 0;
             $scope.cards_revised_percentage = $scope.current_card_index / $scope.size_of_today_deck * 100;
-            if($scope.size_of_today_deck && $scope.size_of_today_deck <= 0){
+            if ($scope.size_of_today_deck && $scope.size_of_today_deck <= 0) {
                 $scope.cards_revised_percentage = 100
                 toastr.info("You are all caught up..No cards to revise in this deck", 'Info');
                 $scope.cardVisible = false;
@@ -151,7 +151,7 @@ studentCompanionApp.controller('flashcardCtrl', ['$scope', 'apiService', functio
     $scope.shownextCard = function(difficulty) {
         $scope.FinishCard($scope.cardsofDeck[$scope.current_card_index].id, difficulty);
         $scope.current_card_index = $scope.current_card_index + 1;
-        $scope.cards_revised_percentage = $scope.current_card_index / $scope.size_of_today_deck * 100;
+        $scope.cards_revised_percentage = Math.floor($scope.current_card_index / $scope.size_of_today_deck * 100);
         console.log($scope.cards_revised_percentage)
         if ($scope.size_of_today_deck == $scope.current_card_index) {
             $scope.CardHide();
