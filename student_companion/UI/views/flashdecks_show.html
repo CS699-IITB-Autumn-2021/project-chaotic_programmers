@@ -49,9 +49,44 @@
                   <div>{{card.question}}</div>
                   <div>{{card.answer}}</div>
                   <a class="fas fa-trash-alt red" ng-click="delCard(card.id)">Delete</a>
+                  <a class="far fa-edit red" data-toggle="modal" data-target="#editModal" ng-click="getCard(card.id)">Edit</a>
                 </div>
               </article>
               
             </main>
+          </div>
+          <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="editModalLabel">Make Changed to your flashcard</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="input-group mb-3">
+                     <label class="input-group-text">Flashcard Title: </label>
+                        <input type="text" name="Flashcard Title" class="form-control input_user"  ng-init="editflashcardTitle= currEditFlashcardTitle"  placeholder="{{currEditFlashcardTitle}}" ng-model="editflashcardTitle">
+                    </div>
+                    <div class="input-group mb-3">
+
+                     <label class="input-group-text">Flashcard Front: </label>
+                        <input type="text" name="Flashcard Front" class="form-control input_user" ng-init="editflashcardQuestion= currEditFlashcardQuestion"  value="" placeholder="{{currEditFlashcardQuestion}}" ng-model="editflashcardQuestion">
+                    </div>
+                    <div class="input-group mb-3">
+
+                     <label class="input-group-text">Flashcard Back: </label>
+                        <input type="text" name="Flashcard Back" class="form-control input_user" ng-init="editflashcardAnswer= currEditFlashcardAnswer" value="" placeholder="{{currEditFlashcardAnswer}}" ng-model="editflashcardAnswer">
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="editCard()">Save</button>
+                </div>
+              </div>
+            </div>
           </div>
 </div>

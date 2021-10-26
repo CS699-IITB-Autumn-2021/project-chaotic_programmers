@@ -247,6 +247,26 @@ class DeleteFlashCard(APIView):
         # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class EditFlashCard(APIView):
+    """
+    List all snippets, or create a new snippet.
+    """
+    # def get(self, request, format=None):
+    #     objects  = FlashDeck.objects.all()
+    #     serializer = FlashDeckSerializer(objects, many=True)
+    #     return Response(serializer.data)
+
+    def post(self, request, format=None):
+        print(request.data)
+        Flashcard.objects.filter(pk=request.data['card_id']).update(title=request.data['title'],question=request.data['question'],answer=request.data['answer'],)
+        
+        return Response(status=status.HTTP_201_CREATED)
+        # if serializer.is_valid():
+        #     serializer.save()
+        #     return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 class LoggedinUserDetail(APIView):
     """
     Retrieve, update or delete a snippet instance.
