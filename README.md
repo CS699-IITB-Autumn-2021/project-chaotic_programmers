@@ -1,2 +1,4 @@
-# course-project-template
-Project coming up..
+# Student Companion
+
+###Sell your product/service
+`Learn the correct way`
