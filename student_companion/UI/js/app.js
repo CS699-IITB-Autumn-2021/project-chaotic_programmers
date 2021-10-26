@@ -4,6 +4,7 @@ var studentCompanionApp = angular.module('studentCompanionApp');
 studentCompanionApp.controller('flashcardCtrl', ['$scope', 'apiService', function($scope, apiService) {
     $scope.cardVisible = false;
     $scope.backVisible = false;
+    $scope.cardFlipped = false
     console.log('load aavuthu')
 
     // get examples by using exampleService
@@ -71,6 +72,11 @@ studentCompanionApp.controller('flashcardCtrl', ['$scope', 'apiService', functio
             $scope.current_card_index = 0;
             $scope.cards_revised_percentage = 0;
             $scope.cards_revised_percentage = $scope.current_card_index / $scope.size_of_today_deck * 100;
+            if($scope.size_of_today_deck && $scope.size_of_today_deck <= 0){
+                $scope.cards_revised_percentage = 100
+                toastr.info("You are all caught up..No cards to revise in this deck", 'Info');
+                $scope.cardVisible = false;
+            }
             console.log($scope.size_of_today_deck)
         });
         console.log($scope.current_card_index);
@@ -90,7 +96,7 @@ studentCompanionApp.controller('flashcardCtrl', ['$scope', 'apiService', functio
             $scope.current_card_index = 0;
             $scope.cards_revised_percentage = 0;
             $scope.cards_revised_percentage = $scope.current_card_index / $scope.size_of_today_deck * 100;
-            console.log($scope.cardsofDeck[0].id)
+            // console.log($scope.cardsofDeck[0].id)
             if ($scope.size_of_today_deck != 0) {
                 $scope.StartCard($scope.cardsofDeck[0].id);
             } else {

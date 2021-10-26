@@ -1,73 +1,73 @@
-</br>
-<div class="btn-group">
-   <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-   Select your Deck
-   </button>
-   <ul class="dropdown-menu">
-     
-      <li><a class="dropdown-item" href="#" ng-model="deck_name" ng-repeat="eachdeck in decks track by $index" ng-click="CardShow();selectedDeckForRevision($index)" >{{eachdeck.title}}</a></li>
-   </ul>
-   <!-- Modal -->
-   <div class="modal fade" id="createDeckModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-scrollable" role="document">
-         <div class="modal-content">
-            <div class="modal-header">
-               <h5 class="modal-title" id="exampleModalLongTitle">Create A New Deck</h5>
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-               <span aria-hidden="true">&times;</span>
-               </button>
-            </div>
-            <div class="modal-body">
-               <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Name your new deck" ng-model="new_deck_name"  aria-label="Username">
-               </div>
-               <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" ng-model="ModelData.decks" >
-                  <label class="form-check-label" for="flexCheckDefault">
-                  From already created decks
-                  </label>
-                  <div class="form-group" ng-show="ModelData.decks">
-                     <ul class="list-group">
-                        <li class="list-group-item" ng-repeat="eachdeck in decks">
-                           <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
-                           {{eachdeck.title}}
-                        </li>
-                     </ul>
-                  </div>
-               </div>
-            </div>
-            <div class="modal-footer">
-               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-               <button type="button" class="btn btn-primary" ng-click="saveDeck()">Create</button>
-            </div>
-         </div>
+
+<div ng-show="!cardVisible">
+<h3 style="text-align: center; padding-top: 1%; padding-bottom: 1%;"> Existing Decks</h3>
+<p style="text-align: center;" ng-if="decks && decks.length < 1">You currently don't have any decks </p>
+<div class="container">
+   <main class="grid">
+      <article ng-repeat="eachdeck in decks  track by $index">
+      <div class="text">
+         <h3>{{eachdeck.title}}</h3>
+         <a class="far fa-eye" ng-click="CardShow();selectedDeckForRevision($index)">Revise</a>
       </div>
-   </div>
+      </article>
+      
+   </main>
 </div>
+</div>
+
+
+
+
+<!-- Flip reference: https://www.w3schools.com/howto/howto_css_flip_card.asp -->
 <div ng-show = "cardVisible" id="ShowFlashCard">
-   <div class="card text-center">
-      <div class="card-header">
-         </br>
-         <div class="progress" style="height: 10px;">
-            <div class="progress-bar bg-success" role="progressbar" ng-style="displayPercentage" aria-valuenow={{cards_revised_percentage}} aria-valuemin="0" aria-valuemax="100">{{cards_revised_percentage}}%</div>
-         </div>
-         <h5 class="card-title" >{{cardsofDeck[current_card_index].title}}</h5>
+<div class="text-center flip-card" >
+   <div class="test" ng-class="{'is-flipped': cardFlipped == true}">
+      <div class="progress" style="height: 10px;">
+         <div class="progress-bar bg-success" role="progressbar" ng-style="displayPercentage" aria-valuenow={{cards_revised_percentage}} aria-valuemin="0" aria-valuemax="100">{{cards_revised_percentage}}%</div>
       </div>
-      <div class="card-body">
-         <h5 class="card-title">Front</h5>
-         <p class="card-text">{{cardsofDeck[current_card_index].question}}</p>
-         <a href="#" class="btn btn-primary" ng-click="BackShow()" >Show/Hide Answer</a>
-      </div>
-      <div ng-show="backVisible"  id="ShowAnswer">
-         <div  class="card-body">
-            <h5 class="card-title">Back</h5>
-            <p class="card-text">{{cardsofDeck[current_card_index].answer}}</p>
-            <a href="#" class="btn btn-success" ng-click="BackHide();shownextCard(1);displayPercentage={'width': cards_revised_percentage + '%'}">EASY</a>
-            <a href="#" class="btn btn-warning" ng-click="BackHide();shownextCard(2);displayPercentage={'width': cards_revised_percentage + '%'}">MEDIUM</a>
-            <a href="#" class="btn btn-danger" ng-click="BackHide();shownextCard(3);displayPercentage={'width': cards_revised_percentage + '%'}">HARD</a>
+      <h5 class="card-title" >{{cardsofDeck[current_card_index].title}}</h5>
+      <a href="#" class="fas fa-sync-alt" ng-click="BackShow(); cardFlipped = !cardFlipped" >Show/Hide Answer</a>
+
+      <div class="flip-card-inner">
+         <div class="flip-card-front">
+            <div class="card">
+               <div class="card-header">
+                  <h5 class="card-title">Front</h5>
+               </div>
+
+               <div class="card-body">
+                  <p class="card-text">{{cardsofDeck[current_card_index].question}}</p>
+               
+               </div>
+
+            </div>
          </div>
+
+
+         <div class="flip-card-back">
+            <div class="card">
+               <div class="card-header">
+                  <h5 class="card-title">Back</h5>
+               </div>
+
+               <div class="card-body">
+                  <p class="card-text">{{cardsofDeck[current_card_index].answer}}</p>
+            <a href="#" class="btn btn-success" ng-click="BackHide();shownextCard(1);displayPercentage={'width': cards_revised_percentage + '%'}; cardFlipped = !cardFlipped">EASY</a>
+            <a href="#" class="btn btn-warning" ng-click="BackHide();shownextCard(2);displayPercentage={'width': cards_revised_percentage + '%'}; cardFlipped = !cardFlipped">MEDIUM</a>
+            <a href="#" class="btn btn-danger" ng-click="BackHide();shownextCard(3);displayPercentage={'width': cards_revised_percentage + '%'};cardFlipped = !cardFlipped">HARD</a>
+               </div>
+
+            </div>
+      <div class="flip-card-back">
+         
+         
+      </div>
       </div>
    </div>
+
 </div>
+</div>
+
+
 <div ui-view>
 </div>

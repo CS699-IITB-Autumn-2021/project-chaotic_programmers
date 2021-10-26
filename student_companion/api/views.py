@@ -190,8 +190,10 @@ class DeckManager(APIView):
                 objects  = Flashcard.objects.filter(owner=request.user, flash_deck = flashdeck)
                 serializer = FlashCardSerializer(objects, many=True)
                 for flashcard in serializer.data:
-                    fcard=Flashcard(title=list(flashcard.values())[1],flash_deck_id=deck_user.id,owner=request.user,question=list(flashcard.values())[2],answer=list(flashcard.values())[3],)
+                    fcard=Flashcard(title=list(flashcard.values())[1],flash_deck_id=deck.id,owner=request.user,question=list(flashcard.values())[2],answer=list(flashcard.values())[3],)
                     fcard.save()
+                    flashcard_user = FlashcardUser(flashcard = fcard, user = request.user)
+                    flashcard_user.save()
         return Response(status=status.HTTP_201_CREATED)
         # if serializer.is_valid():
         #     serializer.save()
