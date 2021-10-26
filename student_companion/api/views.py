@@ -164,6 +164,10 @@ class SaveFinish(APIView):
         activity_objects = ActivityMonitor.objects.filter(user=request.user)
         activity_serializer = ActivityMonitorSerializer(activity_objects, many=True)
         ActivityMonitor.objects.filter(pk=list(activity_serializer.data[-1].values())[0]).update(time_spent=curr_time_taken,cards_seen=list(activity_serializer.data[-1].values())[4]+1,)
+
+
+        Flashcard.objects.filter(pk=request.data['flashcard_id']).update(next_scheduled_at=next_scheduled_at,)
+
         return Response(status=status.HTTP_201_CREATED)
 
         

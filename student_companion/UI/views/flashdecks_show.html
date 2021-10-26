@@ -48,6 +48,7 @@
                   <h3>{{card.title}}</h3>
                   <div>{{card.question}}</div>
                   <div>{{card.answer}}</div>
+                  <div>Next revision due: {{day_scheduled_at}}{{month_scheduled_at}}{{year_scheduled_at}}<div>
                   <a class="fas fa-trash-alt red" ng-click="delCard(card.id)">Delete</a>
                   <a class="far fa-edit red" data-toggle="modal" data-target="#editModal" ng-click="getCard(card.id)">Edit</a>
                 </div>
