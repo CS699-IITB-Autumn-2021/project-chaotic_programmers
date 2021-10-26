@@ -38,6 +38,7 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
         SaveFinishCard: SaveFinishCard,
         deleteCard: deleteCard,
         shareDeckToFriend: shareDeckToFriend,
+        EditCard: EditCard,
     };
 
 
@@ -93,6 +94,10 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
 
     function deleteCard(params) {
         return Restangular.one('card').customPOST(params, "delete/")
+    }
+
+    function EditCard(params) {
+        return Restangular.one('card').customPOST(params, "edit/")
     }
 
     function fetchCardsofDeck(params) {

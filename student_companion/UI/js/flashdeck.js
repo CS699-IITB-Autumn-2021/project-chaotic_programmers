@@ -42,26 +42,26 @@ studentCompanionApp.controller('flashdeckCtrl', ['$scope', 'apiService', '$uibMo
         $state.go("profile.flashdeck_show", { id: deck_id })
     }
 
-    $scope.shareDeck = function(deck_id){
+    $scope.shareDeck = function(deck_id) {
         console.log('here at parent')
         $scope.open("lg", deck_id)
     }
 
-    $scope.open = function (size, deck_id) {
+    $scope.open = function(size, deck_id) {
 
-        
+
         var modalInstance = $uibModal.open({
             animation: false,
             templateUrl: 'share_deck.html',
             controller: 'shareDeckCtrl',
             size: size,
             resolve: {
-                deck: function () {
+                deck: function() {
                     return deck_id;
                 },
             }
         });
-    
+
     };
 
     $scope.getDecks()
@@ -99,9 +99,54 @@ studentCompanionApp.controller('flashdeckShowCtrl', ['$scope', 'apiService', '$u
             $scope.flashcards = response;
         });
     }
+    $scope.getCard = function(flashcard_id) {
+        for (var i = 0; i < $scope.flashcards.length; i++) {
+            if ($scope.flashcards[i]["id"] == flashcard_id) {
+                $scope.currEditFlashcardid = flashcard_id;
+                $scope.currEditFlashcardTitle = $scope.flashcards[i]["title"];
+                $scope.currEditFlashcardQuestion = $scope.flashcards[i]["question"];
+                $scope.currEditFlashcardAnswer = $scope.flashcards[i]["answer"];
+                $scope.editflashcardTitle = $scope.currEditFlashcardTitle;
+                $scope.editflashcardQuestion = $scope.currEditFlashcardQuestion;
+                $scope.editflashcardAnswer = $scope.currEditFlashcardAnswer;
+            }
+        }
+    }
+    $scope.editCard = function() {
+        if (typeof $scope.editflashcardTitle == 'undefined') {
+            flashtitle = $scope.currEditFlashcardTitle;
+        } else {
+            flashtitle = $scope.editflashcardTitle;
+        }
+        if (typeof $scope.editflashcardQuestion == 'undefined') {
+            flashquestion = $scope.currEditFlashcardQuestion;
+        } else {
+            flashquestion = $scope.editflashcardQuestion;
+        }
+        if (typeof $scope.editflashcardAnswer == 'undefined') {
+            flashanswer = $scope.currEditFlashcardAnswer;
+        } else {
+            flashanswer = $scope.editflashcardAnswer;
+        }
+
+        params = {
+            card_id: $scope.currEditFlashcardid,
+            title: flashtitle,
+            question: flashquestion,
+            answer: flashanswer
+        }
+        console.log($scope.currEditFlashcardid);
+        apiService.EditCard(params).then(function(response) {
+            $scope.getCards()
+            toastr.success("FlashCard Edited", 'Success');
+        }, function(response) {
+            toastr.error("Please try again later.", 'Failed to edit card');
+        });
+    }
 
     $scope.viewCard = function(flashcard_id) {
         $state.go("profile.flashcard_show", { flashcard_id: flashcard_id })
+
     }
     $scope.delCard = function(flashcard_id) {
         params = {
@@ -111,7 +156,7 @@ studentCompanionApp.controller('flashdeckShowCtrl', ['$scope', 'apiService', '$u
             $scope.getCards()
             toastr.success("FlashCard deleted", 'Success');
         }, function(response) {
-            toastr.error("Please try again later.", 'Failed to create card');
+            toastr.error("Please try again later.", 'Failed to delete card');
         });
     }
     $scope.getCards()
@@ -126,38 +171,38 @@ studentCompanionApp.controller('flashcardShowCtrl', ['$scope', 'apiService', '$u
 
 
 
-studentCompanionApp.controller('shareDeckCtrl', ['$scope', 'apiService', '$modalInstance', 'deck','$window', function($scope, apiService, $modalInstance, deck, $window) {
+studentCompanionApp.controller('shareDeckCtrl', ['$scope', 'apiService', '$modalInstance', 'deck', '$window', function($scope, apiService, $modalInstance, deck, $window) {
 
-  
+
     console.log('form share')
     $scope.deckId = deck
-    
 
-    $scope.ok = function () {
+
+    $scope.ok = function() {
         $modalInstance.dismiss('cancel');
         $scope.share()
     };
-  
-    $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
+
+    $scope.cancel = function() {
+        $modalInstance.dismiss('cancel');
     };
 
     apiService.getFriends().then(function(response) {
         $scope.friends = response;
     });
 
-    $scope.share = function(){
+    $scope.share = function() {
         var params = {
-            friend_id : $scope.friend_id,
-            deck_id : $scope.deckId
+            friend_id: $scope.friend_id,
+            deck_id: $scope.deckId
         }
         console.log(params)
         apiService.shareDeckToFriend(params).then(function(response) {
             toastr.success("Added to friend list", 'Success');
-          }, function(response) {
+        }, function(response) {
             toastr.error("No such user/ friend already added", 'Failed to add friend');
-          });
+        });
 
     }
 
-  }]);
+}]);

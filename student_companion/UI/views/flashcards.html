@@ -1,13 +1,10 @@
 </br>
 <div class="btn-group">
    <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-   Select or Create your Deck
+   Select your Deck
    </button>
    <ul class="dropdown-menu">
-      <li><a class="dropdown-item"  data-toggle="modal" data-target="#createDeckModal">Create New Deck</a></li>
-      <li>
-         <hr class="dropdown-divider">
-      </li>
+     
       <li><a class="dropdown-item" href="#" ng-model="deck_name" ng-repeat="eachdeck in decks track by $index" ng-click="CardShow();selectedDeckForRevision($index)" >{{eachdeck.title}}</a></li>
    </ul>
    <!-- Modal -->
