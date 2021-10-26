@@ -97,6 +97,54 @@ studentCompanionApp.controller('flashdeckShowCtrl', ['$scope', 'apiService', '$u
 
         apiService.fetchCardsofDeck(params).then(function(response) {
             $scope.flashcards = response;
+            for (var i = 0; i < $scope.flashcards.length; i++) {
+                date_time_scheduled_at = $scope.flashcards[i]["next_scheduled_at"];
+                date_scheduled_at = date_time_scheduled_at.split("T")[0];
+                $scope.year_scheduled_at = date_scheduled_at.split("-")[0];
+                switch (date_scheduled_at.split("-")[1]) {
+                    case "01":
+                        // code block
+                        $scope.month_scheduled_at = " January ";
+                        break;
+                    case "02":
+                        $scope.month_scheduled_at = " February ";
+                        break;
+                    case "03":
+                        $scope.month_scheduled_at = " March ";
+                        break;
+                    case "04":
+                        $scope.month_scheduled_at = " April ";
+                        break;
+                    case "05":
+                        $scope.month_scheduled_at = " May ";
+                        break;
+                    case "06":
+                        $scope.month_scheduled_at = " June ";
+                        break;
+                    case "07":
+                        $scope.month_scheduled_at = " July ";
+                        break;
+                    case "08":
+                        $scope.month_scheduled_at = " August ";
+                        break;
+                    case "09":
+                        $scope.month_scheduled_at = " September ";
+                        break;
+                    case "10":
+                        $scope.month_scheduled_at = " October ";
+                        break;
+                    case "11":
+                        $scope.month_scheduled_at = " November ";
+                        break;
+                    case "12":
+                        $scope.month_scheduled_at = " December ";
+                        break;
+                    default:
+                        // code block
+                }
+                $scope.day_scheduled_at = date_scheduled_at.split("-")[2];
+
+            }
         });
     }
     $scope.getCard = function(flashcard_id) {

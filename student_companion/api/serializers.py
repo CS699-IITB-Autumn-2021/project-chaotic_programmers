@@ -19,7 +19,7 @@ class FlashDeckSerializer(serializers.ModelSerializer):
 class FlashCardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Flashcard
-        fields = ['id', 'title', 'question','answer']
+        fields = ['id', 'title', 'question','answer','next_scheduled_at']
 
 class FlashCardUserSerializer(serializers.ModelSerializer):
     class Meta:

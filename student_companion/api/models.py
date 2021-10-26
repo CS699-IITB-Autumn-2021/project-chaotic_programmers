@@ -36,6 +36,7 @@ class Flashcard(models.Model):
     flash_deck = models.ForeignKey(FlashDeck, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
+    next_scheduled_at = models.DateTimeField(auto_now_add=True)
 
 
 class FlashcardUser(models.Model):
