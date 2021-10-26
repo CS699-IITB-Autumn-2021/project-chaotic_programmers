@@ -112,7 +112,24 @@ class GetTodaysRevisionFlashCardforDeck(APIView):
             if(list(serializer1.data[-1].values())[-1]==None or datetime.datetime.strptime(list(serializer1.data[-1].values())[-1],"%Y-%m-%dT%H:%M:%S.%fZ")<=datetime.datetime.utcnow()):
                 returnlist.append(row)
         print(returnlist)
-        return Response(returnlist)
+        final_returnlist=[]
+        list_len=len(returnlist)
+        for i in range(list_len):
+            min_index=0
+            min_time=list(returnlist[0].values())[2]
+            index=0
+            min_row=returnlist[0]
+            for row in returnlist:
+                if(list(row.values())[2]>min_time):
+                    min_index=index
+                    min_time=list(row.values())[2]
+                    min_row=row
+                index+=1
+            final_returnlist.append(min_row)
+            del returnlist[min_index]
+        print(final_returnlist)
+
+        return Response(final_returnlist)
 
 class SaveStart(APIView):
     def post(self, request, format=None): 
