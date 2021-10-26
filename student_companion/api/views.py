@@ -11,34 +11,44 @@ from api.lib import get_logged_in_user
 import datetime
 import dateutil.relativedelta
 from django.db.models import Sum
-
-# from django.contrib.auth.models import User
 from api.serializers import RegisterSerializer
 from rest_framework import generics
-
 from django.contrib.auth.models import update_last_login
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.permissions import AllowAny
-
 from django.contrib.auth import get_user_model
 
-
-
-
 class RegisterView(generics.CreateAPIView):
+    """
+        Description:
+            Contains Registration variables initialization
+    """
     authentication_classes = []
     permission_classes = (AllowAny,)
     queryset = get_user_model().objects.all()
-    # permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
 
 
 class CustomAuthToken(ObtainAuthToken):
+    """
+        Description:
+            Contains post function to create a custom authentication token
+    """
     authentication_classes = []
     permission_classes = (AllowAny,)
 
     def post(self, request, *args, **kwargs):
+        """
+        Description:
+            For a login generate Authentication Token
+
+        Arguments:
+            request - contains login data
+
+        Returns:
+            Status if token created
+        """
         serializer = self.serializer_class(data=request.data,
                                            context={'request': request})
         serializer.is_valid(raise_exception=True)
@@ -56,36 +66,58 @@ class CustomAuthToken(ObtainAuthToken):
         })
 
 class Logout(APIView):
+    """
+        Description:
+            Contains post function for logging out
+    """
     def post(self, request, format=None):
-        # simply delete the token to force a login
+        """
+        Description:
+            Deleted token to force a login
+        Arguments:
+            request - contains authentication token
+
+        Returns:
+            Status of logging out
+        """
         request.user.auth_token.delete()
         return Response(status=status.HTTP_200_OK)
 
-
-
 class DeckModelList(APIView):
     """
-    List all snippets, or create a new snippet.
+        Description:
+            Contains get function for getting decks
     """
     def get(self, request, format=None):
+        """
+        Description:
+            Returns all decks for a user
+
+        Arguments:
+            request - contains deck id
+
+        Returns:
+            All decks of user
+        """
         objects  = FlashDeck.objects.filter(owner = request.user)
         serializer = FlashDeckSerializer(objects, many=True)
         return Response(serializer.data)
 
-
-    # def post(self, request, format=None):
-    #      print(request.data)
-    #     #  serializer = TestModelSerializer(data=request.data)
-    #     #  if serializer.is_valid():
-    #     #      serializer.save()
-    #     #      return Response(serializer.data, status=status.HTTP_201_CREATED)
-    #     #  return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 class ExistingFlashCardsList(APIView):
     """
-    List all snippets, or create a new snippet.
+        Description:
+            Contains get function for fetching flashcards
     """
     def get(self, request, format=None):
+        """
+        Description:
+            Returns all the flashcards for a deck
+        Arguments:
+            request - contains deck id
+
+        Returns:
+            Flashcard for deck id
+        """
         deck_id = request.query_params.get('deck_id')
         flashdeck = FlashDeck.objects.get(pk = deck_id)
         objects  = Flashcard.objects.filter(owner=request.user, flash_deck = flashdeck)
@@ -93,8 +125,20 @@ class ExistingFlashCardsList(APIView):
         return Response(serializer.data)
 
 class GetTodaysRevisionFlashCardforDeck(APIView):
-    
+    """
+        Description:
+            Contains get function for active recall
+    """
     def get(self, request, format=None):
+        """
+        Description:
+            Retuns all the flash cards that are due before today sorted in time taken in previous revision
+        Arguments:
+            request - deck id
+
+        Returns:
+            Cards that need to be revised today
+        """
         deck_id = request.query_params.get('deck_id')
         flashdeck = FlashDeck.objects.get(pk = deck_id)
         objects  = Flashcard.objects.filter(owner=request.user, flash_deck = flashdeck)
@@ -102,16 +146,10 @@ class GetTodaysRevisionFlashCardforDeck(APIView):
         returnlist=[]
         for row in serializer.data:
             flashcard_id=list(row.values())[0]
-            # print(flashcard_id)
             objects1 = FlashcardUser.objects.filter(flashcard = flashcard_id,user=request.user)
             serializer1 = FlashCardUserSerializer(objects1, many=True)
-            # print(serializer1.data)
-            # if(list(serializer1.data[-1].values())[-1]!=None):
-            #     print(datetime.datetime.strptime(list(serializer1.data[-1].values())[-1],"%Y-%m-%dT%H:%M:%S.%fZ"))
-            # print(datetime.datetime.now())
             if(list(serializer1.data[-1].values())[-1]==None or datetime.datetime.strptime(list(serializer1.data[-1].values())[-1],"%Y-%m-%dT%H:%M:%S.%fZ")<=datetime.datetime.utcnow()):
                 returnlist.append(row)
-        print(returnlist)
         final_returnlist=[]
         list_len=len(returnlist)
         for i in range(list_len):
@@ -127,12 +165,24 @@ class GetTodaysRevisionFlashCardforDeck(APIView):
                 index+=1
             final_returnlist.append(min_row)
             del returnlist[min_index]
-        print(final_returnlist)
-
         return Response(final_returnlist)
 
 class SaveStart(APIView):
+    """
+        Description:
+            Contains post function for storing start time of flashcards
+    """
     def post(self, request, format=None): 
+        """
+        Description:
+            Stores a dummy date in flashcarduser model to later compare the time and know the time taken by user
+
+        Arguments:
+            request - Flash card id that started revision 
+
+        Returns:
+            Status if the start time is saved or not
+        """
         objects1 = FlashcardUser.objects.filter(flashcard = request.data['flashcard_id'],user=request.user)
         serializer1 = FlashCardUserSerializer(objects1, many=True)    
         last_time_taken=list(serializer1.data[-1].values())[2] 
@@ -144,7 +194,21 @@ class SaveStart(APIView):
         return Response(status=status.HTTP_201_CREATED)
 
 class SaveFinish(APIView):
+    """
+        Description:
+            Contains post function for storing end time of flashcards
+    """
     def post(self, request, format=None):
+        """
+        Description:
+            Stores the next_scheduled_day for flashcard after revising the card by calculating the time taken and user's selection
+
+        Arguments:
+            request - flashcard if of current flash card that finished revising 
+
+        Returns:
+            Status if the card is scheduled or not
+        """
         objects1 = FlashcardUser.objects.filter(flashcard = request.data['flashcard_id'],user=request.user)
         serializer1 = FlashCardUserSerializer(objects1, many=True)
         id_of_flashcarduser=list(serializer1.data[-1].values())[0]
@@ -170,14 +234,11 @@ class SaveFinish(APIView):
         gap14days=dateutil.relativedelta.relativedelta(days=(14+int(penalty*30)))
         if(difficulty==1):
             next_scheduled_at=now+gap_in_revision+gap14days
-            print(next_scheduled_at)
         elif difficulty==2:
             next_scheduled_at=now+gap_in_revision+gap7days
         else:
             next_scheduled_at=now+gap_in_revision+gap3days
         FlashcardUser.objects.filter(pk=id_of_flashcarduser).update(last_opened=datetime.datetime.now(),last_time_taken=last_time_taken,next_scheduled_at=next_scheduled_at,)
-        # flashcard_user = FlashcardUser(flashcard_id = request.data['flashcard_id'], user = request.user,last_opened=datetime.datetime.now(),last_time_taken=last_time_taken,next_scheduled_at=next_scheduled_at,)
-        # flashcard_user.save()
         activity_objects = ActivityMonitor.objects.filter(user=request.user)
         activity_serializer = ActivityMonitorSerializer(activity_objects, many=True)
         ActivityMonitor.objects.filter(pk=list(activity_serializer.data[-1].values())[0]).update(time_spent=curr_time_taken,cards_seen=list(activity_serializer.data[-1].values())[4]+1,)
@@ -190,15 +251,20 @@ class SaveFinish(APIView):
         
 class DeckManager(APIView):
     """
-    List all snippets, or create a new snippet.
+        Description:
+            Contains post function for sadding a new deck
     """
-    # def get(self, request, format=None):
-    #     objects  = FlashDeck.objects.all()
-    #     serializer = FlashDeckSerializer(objects, many=True)
-    #     return Response(serializer.data)
-
-
     def post(self, request, format=None):
+        """
+        Description:
+            Saved a new deck into the model
+
+        Arguments:
+            request -contains deck name 
+
+        Returns:
+            Status of new deck creation
+        """
         custom_deck_ids=request.data['deck_ids']
         deck_title = request.data['title']
         deck = FlashDeck(title = deck_title, owner = request.user)
@@ -216,23 +282,24 @@ class DeckManager(APIView):
                     flashcard_user = FlashcardUser(flashcard = fcard, user = request.user)
                     flashcard_user.save()
         return Response(status=status.HTTP_201_CREATED)
-        # if serializer.is_valid():
-        #     serializer.save()
-            
-        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class NewFlashCardList(APIView):
     """
-    List all snippets, or create a new snippet.
+        Description:
+            Contains post function for storing  of flashcards
     """
-    # def get(self, request, format=None):
-    #     objects  = FlashDeck.objects.all()
-    #     serializer = FlashDeckSerializer(objects, many=True)
-    #     return Response(serializer.data)
-
 
     def post(self, request, format=None):
-        print(request.data)
+        """
+        Description:
+            Saves new flashcard for given deck
+
+        Arguments:
+            request - contains new flash card details i.e title , question, answer
+
+        Returns:
+            Status of new flashcard creation
+        """
         card_title = request.data['title']
         card_question = request.data['question']
         card_answer = request.data['answer']
@@ -246,56 +313,62 @@ class NewFlashCardList(APIView):
         flashcard_user = FlashcardUser(flashcard = flashcard, user = request.user)
         flashcard_user.save()
         return Response(status=status.HTTP_201_CREATED)
-        # if serializer.is_valid():
-        #     serializer.save()
-        #     return Response(serializer.data, status=status.HTTP_201_CREATED)
-        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class DeleteFlashCard(APIView):
     """
-    List all snippets, or create a new snippet.
+        Description:
+            Contains post function to delete flashcards
     """
-    # def get(self, request, format=None):
-    #     objects  = FlashDeck.objects.all()
-    #     serializer = FlashDeckSerializer(objects, many=True)
-    #     return Response(serializer.data)
-
-
     def post(self, request, format=None):
+        """
+        Description:
+            Deletes flashcard given flashcard_id
+        Arguments:
+            request - flash card id 
+
+        Returns:
+            Status if flashcard successfully deleted
+        """
         Flashcard.objects.filter(pk=request.data['card_id']).delete()
         return Response(status=status.HTTP_201_CREATED)
-        # if serializer.is_valid():
-        #     serializer.save()
-        #     return Response(serializer.data, status=status.HTTP_201_CREATED)
-        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 class EditFlashCard(APIView):
     """
-    List all snippets, or create a new snippet.
+        Description:
+            Contains post function to edit flashcards
     """
-    # def get(self, request, format=None):
-    #     objects  = FlashDeck.objects.all()
-    #     serializer = FlashDeckSerializer(objects, many=True)
-    #     return Response(serializer.data)
-
     def post(self, request, format=None):
-        print(request.data)
+        """
+        Description:
+            Updates flashcard using new information
+
+        Arguments:
+            request - contains flashcard id and user id
+
+        Returns:
+            Status of edit, if its successful
+        """
         Flashcard.objects.filter(pk=request.data['card_id']).update(title=request.data['title'],question=request.data['question'],answer=request.data['answer'],)
         
         return Response(status=status.HTTP_201_CREATED)
-        # if serializer.is_valid():
-        #     serializer.save()
-        #     return Response(serializer.data, status=status.HTTP_201_CREATED)
-        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LoggedinUserDetail(APIView):
     """
-    Retrieve, update or delete a snippet instance.
+        Description:
+            Contains get function to get details of logged in user
     """
-
     def get(self, request, format=None):
+        """
+        Description:
+            Gets details of logged in user details
+
+        Arguments:
+            request - user id 
+
+        Returns:
+            User details of currently loggen in user
+        """
         resp = get_logged_in_user()
         serializer = UserSerializer(resp)
         return Response(serializer.data)
@@ -303,10 +376,20 @@ class LoggedinUserDetail(APIView):
 
 class UserDetail(APIView):
     """
-    Retrieve, update or delete a snippet instance.
+        Description:
+            Manages user details
     """
     def get_object(self, key, value, current_user):
-        #Getting user object which has correct value for that key
+        """
+        Description:
+            Get every user object for correct key value pair
+
+        Arguments:
+            request - contains  user id
+
+        Returns:
+            Returns user object
+        """
         kwargs = {
             '{0}'.format(key) : '{0}'.format(value)
         }
@@ -321,6 +404,16 @@ class UserDetail(APIView):
             raise Http404
 
     def get(self, request, format=None):
+        """
+        Description:
+            Gets user object based on search key and search value
+
+        Arguments:
+            request - contains user token key and value
+
+        Returns:
+            Returns data of user as response
+        """
         search_key = request.query_params.get('key')
         search_value = request.query_params.get('value')
         obj = self.get_object(search_key, search_value, request.user)
@@ -330,11 +423,20 @@ class UserDetail(APIView):
 
 class FriendDetail(APIView):
     """
-    Retrieve, update or delete a snippet instance.
+        Description:
+            Contains post function for fetching friends details
     """
     def post(self, request, format=None):
-        print("\n\n\n\n\n")
-        print(request.data)
+        """
+        Description:
+            Get details of friends for a user
+
+        Arguments:
+            request - friend id  
+
+        Returns:
+            Details of friend
+        """
         friend_user_id = request.data['friend_id']
         if not friend_user_id:
             raise Http404
@@ -351,17 +453,41 @@ class FriendDetail(APIView):
 
 class FriendList(APIView):
     """
-    List all snippets, or create a new snippet.
+        Description:
+            Getting Friend List
     """
     def get(self, request, format=None):
+        """
+        Description:
+            Gets list of all the friends of the user
+
+        Arguments:
+            request - contains user details
+
+        Returns:
+            Data of user's friend
+        """
         current_user = request.user
         objects  = current_user.relations.all()
         serializer = UserSerializer(objects, many=True)
         return Response(serializer.data)
 
 class LeaderboardList(APIView):
-
+    """
+        Description:
+            Functions to handle leaderboard generation
+    """
     def get_start_date(self, period):
+        """
+        Description:
+            Gets date for before a requested time for  leaderboard
+
+        Arguments:
+            request - contains time period
+
+        Returns:
+            Date before a requested time
+        """
         now = datetime.datetime.now()
         if period == 'Last 1 Month':
             return now + dateutil.relativedelta.relativedelta(months=-1)
@@ -372,6 +498,16 @@ class LeaderboardList(APIView):
         return now
 
     def get_user_ids(self, current_user):
+        """
+        Description:
+            Fetch the list of users to display it on leaderboard
+
+        Arguments:
+            request - id and other details of current user 
+
+        Returns:
+            all ids of friends of userid passed to it
+        """
         all_ids = []
         all_ids.append(current_user.id)
         friend_ids = list(current_user.relations.all().values_list('id', flat=True))
@@ -379,26 +515,37 @@ class LeaderboardList(APIView):
         return all_ids
 
     def get_order_criteria(self, criteria):
+        """
+        Description:
+            Gets the order criteria for a user
+
+        Arguments:
+            request - contains display critera
+
+        Returns:
+            The display criteria requested
+        """
         if(criteria == 'Cards Revised'):
             return "-total_cards"
         else:
             return "-total_time"
 
     def get(self, request, format=None):
-        
+        """
+        Description:
+            Gets the details of time taken by friends and the number of cards revised y them sand sorted in terms of the requested order
+
+        Arguments:
+            request - contains crtieria and period of displaying leaderboard 
+
+        Returns:
+            The leaderboard details in sorted manner
+        """
         criteria = request.query_params.get('criteria')
         period = request.query_params.get('period')
-
-
-        print("\n\n\n\\n\n\n")
-        print(criteria, period)
         all_ids = self.get_user_ids(request.user)
         start_date = self.get_start_date(period)
         order = self.get_order_criteria(criteria)
-
-        print("start_date: ", start_date)
-        print("ids: ", all_ids)
-        print("order: ", order)
         query_set = ActivityMonitor.objects.filter(user_id__in = all_ids, date__date__gt = start_date).values('user_id').annotate(total_time = Sum('time_spent'), total_cards = Sum('cards_seen')).order_by(order)
         result_set = []
         for result in query_set:
@@ -412,26 +559,31 @@ class LeaderboardList(APIView):
 
 class shareFlashdeck(APIView):
     """
-    Retrieve, update or delete a snippet instance.
+        Description:
+            Contains get and post functions for sharing flashcards
     """
     def post(self, request, format=None):
+        """
+        Description:
+            Saves a copy of flashcards in a deck for a friend
+
+        Arguments:
+            request - contains  deck id and friend id
+
+        Returns:
+            Returns response if succesfully created or not
+        """
         deck_id = request.data['deck_id']
         friend_user_id = request.data['friend_id']
-
         friend = ScUser.objects.get(username = friend_user_id)
         deck_cpy = FlashDeck.objects.get(pk = deck_id)
-        
-        #copy deck to new object
         deck_cpy.id = None
         deck_cpy.owner = friend
         deck_cpy.save()
-
         old_deck = FlashDeck.objects.get(pk = deck_id)
-
         for card in old_deck.flashcard_set.all():
             flashcard = Flashcard(title = card.title, question = card.question, answer = card.answer, flash_deck = deck_cpy, owner = friend)
             flashcard.save()
-
             flashcard_user = FlashcardUser(flashcard = flashcard, user = friend)
             flashcard_user.save()
         return Response(status=status.HTTP_201_CREATED)
