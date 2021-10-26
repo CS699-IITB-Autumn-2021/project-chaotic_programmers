@@ -178,12 +178,20 @@ class DeckManager(APIView):
 
 
     def post(self, request, format=None):
-        print(request.data)
+        custom_deck_ids=request.data['deck_ids']
         deck_title = request.data['title']
         deck = FlashDeck(title = deck_title, owner = request.user)
         deck.save()
         deck_user = FlashDeckUser(flashdeck = deck , user = request.user)
         deck_user.save()
+        if(request.data['custom_required']==1 and len(custom_deck_ids)!=0):
+            for deck_id in custom_deck_ids:
+                flashdeck = FlashDeck.objects.get(pk = deck_id)
+                objects  = Flashcard.objects.filter(owner=request.user, flash_deck = flashdeck)
+                serializer = FlashCardSerializer(objects, many=True)
+                for flashcard in serializer.data:
+                    fcard=Flashcard(title=list(flashcard.values())[1],flash_deck_id=deck_user.id,owner=request.user,question=list(flashcard.values())[2],answer=list(flashcard.values())[3],)
+                    fcard.save()
         return Response(status=status.HTTP_201_CREATED)
         # if serializer.is_valid():
         #     serializer.save()

@@ -17,6 +17,21 @@
                 </div>
                 <div class="modal-body">
                     <input type="text" name="" class="form-control input_user" value="" placeholder="Enter Deck name" ng-model="deckName">
+                      <div class="form-check">
+                  <input class="form-check-input" type="checkbox" ng-model="custom_selected"  value="" id="flexCheckDefault"  >
+                  
+                  <label class="form-check-label" for="flexCheckDefault">
+                  From already created decks
+                  </label>
+                  <div class="form-group" ng-show="custom_selected">
+                     <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="eachdeck in decks">
+                           <input class="form-check-input me-1"  ng-model="eachdeck.selected" type="checkbox" value="" aria-label="...">
+                           {{eachdeck.title}}
+                        </li>
+                     </ul>
+                  </div>
+               </div>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
