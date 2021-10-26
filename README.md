@@ -1,4 +1,4 @@
 # Student Companion
 
 ### Sell your product/service
-`Learn the correct way`
+`Learn The Correct Way`
