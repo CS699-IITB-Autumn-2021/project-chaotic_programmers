@@ -13,27 +13,30 @@ Building a website to create a study tool which uses flashcards and timed revisi
 
 ### List of features:
 
-Use of Flashcards for Better revision
-Flashcard sharing to increase subject knowledge
-Leaderboard to have a friendly competition with friends
-Facility to create, edit, and delete flashcards to customize revision
+1. Use of Flashcards for Better revision
+2. Flashcard sharing to increase subject knowledge
+3. Leaderboard to have a friendly competition with friends
+4. Facility to create, edit, and delete flashcards to customize revision
 
 <img width="1024" alt="student_companion_fc" src="https://user-images.githubusercontent.com/88259695/139014658-c53fd033-7c17-4164-a64b-f39c7de85a46.png">
 
 
-### Technology Stack (highlight ones learnt in CS699):
+### Technology Stack:
 
-   Django (For Backend)
-   *Python*
-   *MySql* (For storing and managing data)
-   AngularJS (To make UI Responsive)
-   HTML,CSS
-   Github 
-   *Latex* (For PPT)
-   Sphinx (For Documentation)
+   1. Django
+   2. **Python**
+   3. **Database** [MySql]
+   4. AngularJS
+   5. **HTML**
+   6. **CSS**
+   7. **Javascript**
+   8. **Bootstrap**
+   9. **Github**
+   10. **Latex** (For PPT)
+   11. **Sphinx** (For Documentation)
 
 
-### List of deliverables (tick mark those which are complete):
+### List of deliverables:
 
     Login page for user to login ✓
     Facility to create, edit and delete flashcards ✓
@@ -46,11 +49,11 @@ Facility to create, edit, and delete flashcards to customize revision
     Show current progress of cards for the user and user's friends ✓
 
 
-### Hardware/Software Requirements.
+### Hardware/Software Requirements
 
 
 
-### Well explained, “how to operate”.
+### Well explained, “how to operate”
 
 From Login page students can enter their credentials and login to the website, if he/she is a new user they can register first by registration page. Once logged in user will be taken to the main page where user can decide whether he/she wants to do revision of a particular subject (fr which he can select course from deck) or wants to do mixed revision of all the courses. User can also check his progress and compare his performance with his frind using leaderboard. User is given the facility to add other user a friend and share flashcards with each other. He can create, edit, or delete his owm flashcards as per his requirement. 
 
@@ -90,6 +93,6 @@ Chaotic Programmers
 
 ### Path to Code Documentation (index.html).
 
-#### Python Documentation Path
+[Python Documentation Path](Documentation/PythonDocumentation/Build/html/index.html)
 
-[Python Documentation Path](Documentation/PythonDocumentation/build/html/index.html)
+[Javascript Documentation Path] Coming soon
