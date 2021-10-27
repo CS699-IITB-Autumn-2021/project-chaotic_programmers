@@ -44,7 +44,7 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
 
     /**
      * Useful for getting all models when testing
-     * @returns {list}
+     * @returns {list} All models
      */
     function getTestModels() {
         return Restangular.all('test').getList();
@@ -54,7 +54,7 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
     /**
      * Useful for getting specific models when testing
      * @param {number} id Specific id
-     * @returns {list}
+     * @returns {list} Specific model
      */
     function getTestModel(id) {
         return Restangular.one('test', id).get();
@@ -62,7 +62,7 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
 
     /**
      * Gets all deck names
-     * @returns {list}
+     * @returns {list} Deck names
      */
     function getDeckNames() {
         return Restangular.all('decks').getList();
@@ -70,7 +70,7 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
 
     /**
      * Gets currently logged in user
-     * @returns {list}
+     * @returns {list} Logged in User details
      */
     function getCurrentUser() {
         return Restangular.one('get_logged_in_user').get()
@@ -79,7 +79,7 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
     /**
      * Gets user details    
      * @param {params} id Dictionary of User id
-     * @returns {list}
+     * @returns {list} Specific User Details
      */
     function getUserDetails(params) {
         return Restangular.one('user').customGET("", params)
@@ -88,7 +88,7 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
     /**
      * Sends details of new friend to add it as friend
      * @param {params} id Dictionary of User id and friend id
-     * @returns {list}
+     * @returns {list} Status of adding friend
      */
     function addFriend(params) {
         return Restangular.one('friends').customPOST(params, 'new/')
@@ -97,7 +97,7 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
     /**
      * Gets list of friends
      * @param {params} id Dictionary of User id
-     * @returns {list}
+     * @returns {list} List of Friends
      */
     function getFriends(params) {
         return Restangular.one('friends').customGET("list", {})
@@ -106,7 +106,7 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
     /**
      * Gets leaderboard details in provided sorted order
      * @param {params} id Dictionary of ordering requirements
-     * @returns {list}
+     * @returns {list} Leaderboard details
      */
     function getLeaderboard(params) {
         return Restangular.one('leaderboard').customGET("", params)
@@ -115,7 +115,7 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
     /**
      * Sends deck name to back end to create a new deck
      * @param {params} id Dictionary of deckname
-     * @returns {list}
+     * @returns {list} Status of creating new deck
      */
     function createDeck(params) {
         return Restangular.one('decks').customPOST(params, "new/")
@@ -124,16 +124,16 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
     /**
      * Sends card details to backend to create new flashcard and save in database
      * @param {params} id Dictionary of card title, question and answer
-     * @returns {list}
+     * @returns {list} Sattus of creating flashcard
      */
     function createCard(params) {
         return Restangular.one('card').customPOST(params, "new/")
     }
 
     /**
-     * Sends cardid and eck id to save start time
+     * Sends card id and deck id to save start time
      * @param {params} id Dictionary of cardid ,deckid
-     * @returns {list}
+     * @returns {list} Status of saving start time
      */
     function SaveStartCard(params) {
         return Restangular.one('card').customPOST(params, "savestart/")
@@ -142,7 +142,7 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
     /**
      * Sends card id and deck id to calculate total time taken and also calculate next scheduled time
      * @param {params} id Dictionary of cardid, deckid and difficulty level
-     * @returns {list}
+     * @returns {list} Status of scheduling card
      */
     function SaveFinishCard(params) {
         return Restangular.one('card').customPOST(params, "savefinish/")
@@ -151,7 +151,7 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
     /**
      * Sends deck id to backend to delete deck
      * @param {params} id Dictionary of cardid
-     * @returns {list}
+     * @returns {list} Status of card deletion
      */
     function deleteCard(params) {
         return Restangular.one('card').customPOST(params, "delete/")
@@ -160,7 +160,7 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
     /**
      * Sends new  card info to backend for updation
      * @param {params} id Dictionary of cardid and new card details
-     * @returns {list}
+     * @returns {list} status of edit card
      */
     function EditCard(params) {
         return Restangular.one('card').customPOST(params, "edit/")
@@ -169,7 +169,7 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
     /**
      *  Fetches cards of a specific deck
      * @param {params} id Dictionary of deck id
-     * @returns {list}
+     * @returns {list} Cards of specific deck
      */
     function fetchCardsofDeck(params) {
         return Restangular.one('card').customGET("", params);
@@ -187,7 +187,7 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
     /**
      * Redicts so that user is logged in
      * @param {params} id Dictionary of user details
-     * @returns {list}
+     * @returns {list} Status of login
      */
     function loginUser(params) {
         return Restangular.one('login/').customPOST(params, "")
@@ -196,7 +196,7 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
     /**
      * Send new user details to be saved
      * @param {params} id Dictionary of new user details
-     * @returns {list}
+     * @returns {list} Status of Registration of user
      */
     function registerUser(params) {
         return Restangular.one('register/').customPOST(params, "")
@@ -204,7 +204,7 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
 
     /**
      * Asks to log out user
-     * @returns {list}
+     * @returns {list} Status of logout
      */
     function logoutUser() {
         return Restangular.one('logout/').customPOST("", "")
@@ -213,7 +213,7 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
     /**
      * Sends deck id and friend id to whom the deck is to be shared with
      * @param {params} id Dictionary of odeck id and friend id
-     * @returns {list}
+     * @returns {list} Status of sharing of cards
      */
     function shareDeckToFriend(params) {
         return Restangular.one('sharedeck/').customPOST(params, '')
