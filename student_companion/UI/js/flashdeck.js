@@ -113,13 +113,19 @@ studentCompanionApp.controller('flashdeckShowCtrl', ['$scope', 'apiService', '$u
         params = {
             deck_id: $scope.flashDeckId
         }
-
+        $scope.schedule = {}
         apiService.fetchCardsofDeck(params).then(function(response) {
             $scope.flashcards = response;
             for (var i = 0; i < $scope.flashcards.length; i++) {
+                $scope.schedule[i] = {}
                 date_time_scheduled_at = $scope.flashcards[i]["next_scheduled_at"];
+                
                 date_scheduled_at = date_time_scheduled_at.split("T")[0];
                 $scope.year_scheduled_at = date_scheduled_at.split("-")[0];
+
+
+                $scope.schedule[i].day_scheduled_at = date_scheduled_at.split("-")[2];
+                $scope.schedule[i].year_scheduled_at = date_scheduled_at.split("-")[0];
                 switch (date_scheduled_at.split("-")[1]) {
                     case "01":
                         // code block
@@ -161,6 +167,7 @@ studentCompanionApp.controller('flashdeckShowCtrl', ['$scope', 'apiService', '$u
                     default:
                         // code block
                 }
+                $scope.schedule[i].month_scheduled_at = $scope.month_scheduled_at
                 $scope.day_scheduled_at = date_scheduled_at.split("-")[2];
 
             }
