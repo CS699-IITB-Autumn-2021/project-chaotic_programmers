@@ -65,12 +65,12 @@ Any modern hardware that can run python programs and latest version of browsers.
 
 ### How to operate
 
-> From Login page students can enter their credentials and login to the website, if he/she is a new user they can register first by registration page. 
-> Once logged in user will be taken to the main page where user can decide whether he/she wants to do revision of a particular subject (for which he can select course from deck) or wants to do mixed revision of all the courses.
-> User can create, edit and delete flashcards
-> User can also check his progress and compare his performance with his frind using leaderboard. 
-> User is given the facility to add other user a friend and share flashcards with each other.
-> Users can then create, edit, or delete his owm version for those flashcards as per their requirement. 
+1) From Login page students can enter their credentials and login to the website, if he/she is a new user they can register first by registration page. 
+2) Once logged in user will be taken to the main page where user can decide whether he/she wants to do revision of a particular subject (for which he can select course from deck) or wants to do mixed revision of all the courses.
+3) User can create, edit and delete flashcards
+4) User can also check his progress and compare his performance with his frind using leaderboard. 
+5) User is given the facility to add other user a friend and share flashcards with each other.
+6) Users can then create, edit, or delete his owm version for those flashcards as per their requirement. 
 
 
 ### Primary stakeholders of the product/service built:
