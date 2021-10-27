@@ -1,50 +1,61 @@
 var studentCompanionApp = angular.module('studentCompanionApp');
 
-
+/**
+ * Facilitates flashcard handling
+ */
 studentCompanionApp.controller('flashcardCtrl', ['$scope', 'apiService', function($scope, apiService) {
     $scope.cardVisible = false;
     $scope.backVisible = false;
     $scope.cardFlipped = false
-    console.log('load aavuthu')
 
-    // get examples by using exampleService
-    // apiService.getTestModels().then(function(response) {
-    //     $scope.examples = response;
-    // });
-
-    // // get example with given id by using exampleService
-    // apiService.getTestModel('1').then(function(response) {
-    //     $scope.example = response;
-    // });
-
+    /**
+     * Gets Deck names
+     */
     apiService.getDeckNames().then(function(response) {
         $scope.decks = response;
     });
 
+    /**
+     * Reloads deck
+     */
     $scope.reloadDecks = function() {
         apiService.getDeckNames().then(function(response) {
             $scope.decks = response;
         });
     }
+
+    /**
+     * Shows card
+     */
     $scope.CardShow = function() {
         $scope.cardVisible = true;
-        console.log('Show card');
 
     }
 
+    /**
+     * Hides card
+     */
     $scope.CardHide = function() {
         $scope.cardVisible = false;
     }
 
+    /**
+     * Shows back of card
+     */
     $scope.BackShow = function() {
         $scope.backVisible = true;
-        console.log("Show backside of card");
     }
 
+    /**
+     * Shows back of card
+     */
     $scope.BackHide = function() {
         $scope.backVisible = false;
     }
 
+    /**
+     * Saves deck
+     */
     $scope.saveDeck = function() {
         var params = {
             title: $scope.new_deck_name,
@@ -58,9 +69,10 @@ studentCompanionApp.controller('flashcardCtrl', ['$scope', 'apiService', functio
         });
     }
 
-
+    /**
+     * Selects deck from dropdown
+     */
     $scope.selectedDeckFromDropDown = function(index) {
-        console.log($scope.decks[index]);
         $scope.curr_deck_id = $scope.decks[index].id;
         var params = {
             deck_id: $scope.curr_deck_id
@@ -77,15 +89,14 @@ studentCompanionApp.controller('flashcardCtrl', ['$scope', 'apiService', functio
                 toastr.info("You are all caught up..No cards to revise in this deck", 'Info');
                 $scope.cardVisible = false;
             }
-            console.log($scope.size_of_today_deck)
         });
-        console.log($scope.current_card_index);
     }
 
 
-
+    /**
+     * Selects deck for revision
+     */
     $scope.selectedDeckForRevision = function(index) {
-        console.log($scope.decks[index]);
         $scope.curr_deck_id = $scope.decks[index].id;
         var params = {
             deck_id: $scope.curr_deck_id
@@ -96,7 +107,7 @@ studentCompanionApp.controller('flashcardCtrl', ['$scope', 'apiService', functio
             $scope.current_card_index = 0;
             $scope.cards_revised_percentage = 0;
             $scope.cards_revised_percentage = $scope.current_card_index / $scope.size_of_today_deck * 100;
-            // console.log($scope.cardsofDeck[0].id)
+
             if ($scope.size_of_today_deck != 0) {
                 $scope.StartCard($scope.cardsofDeck[0].id);
             } else {
@@ -105,35 +116,32 @@ studentCompanionApp.controller('flashcardCtrl', ['$scope', 'apiService', functio
                 toastr.success("No cards for revision, come back later!", 'Success');
             }
         });
-        console.log($scope.current_card_index);
     }
+
+    /**
+     * Set start time for card revision
+     */
     $scope.StartCard = function(card_id) {
-        console.log("Flashcard id: " + card_id)
         var params = {
             flashcard_id: card_id
         }
-        apiService.SaveStartCard(params).then(function(response) {
-            console.log("Saved start datetime in next_scheduled_date");
-        }, function(response) {
-            console.log("Failed to save the start datetime in next_scheduled_date");
-        });
-        console.log($scope.current_card_index);
+        apiService.SaveStartCard(params).then(function(response) {}, function(response) {});
     }
+
+    /**
+     * Calculates time taken and also next scheduled date
+     */
     $scope.FinishCard = function(card_id, diff) {
-        console.log("Flashcard id: " + card_id)
         var params = {
             flashcard_id: card_id,
             difficulty: diff,
         }
-        apiService.SaveFinishCard(params).then(function(response) {
-            console.log("Saved end datetime in next_scheduled_date");
-        }, function(response) {
-            console.log("Failed to save the end datetime in next_scheduled_date");
-        });
-        console.log($scope.current_card_index);
+        apiService.SaveFinishCard(params).then(function(response) {}, function(response) {});
     }
 
-
+    /**
+     * Creates new flashcard
+     */
     $scope.newFlashCard = function() {
         var params = {
             title: $scope.new_fcard_title,
@@ -148,11 +156,15 @@ studentCompanionApp.controller('flashcardCtrl', ['$scope', 'apiService', functio
             toastr.error("Please try again later.", 'Failed to create flashcard');
         });
     }
+
+    /**
+     * Shows next flashcard
+     */
     $scope.shownextCard = function(difficulty) {
         $scope.FinishCard($scope.cardsofDeck[$scope.current_card_index].id, difficulty);
         $scope.current_card_index = $scope.current_card_index + 1;
         $scope.cards_revised_percentage = Math.floor($scope.current_card_index / $scope.size_of_today_deck * 100);
-        console.log($scope.cards_revised_percentage)
+
         if ($scope.size_of_today_deck == $scope.current_card_index) {
             $scope.CardHide();
             $scope.BackHide();

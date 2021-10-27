@@ -105,4 +105,4 @@ Chaotic Programmers
 
 [Python Documentation Path](Documentation/PythonDocumentation/Build/html/index.html)
 
-[Javascript Documentation Path] Coming soon
+[Javascript Documentation Path](Documentation/JavaScriptDocumentation/index.html)

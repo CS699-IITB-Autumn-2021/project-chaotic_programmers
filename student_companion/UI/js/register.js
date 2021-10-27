@@ -2,23 +2,29 @@ var studentCompanionApp = angular.module('studentCompanionApp');
 
 
 
-studentCompanionApp.controller('registerCtrl', ['$scope', 'apiService', '$uibModal','$state', function($scope, apiService, $uibModal, $state) {
-        
+studentCompanionApp.controller('registerCtrl', ['$scope', 'apiService', '$uibModal', '$state', function($scope, apiService, $uibModal, $state) {
+
     $scope.validations = {
         username: true,
         email: true
     }
-    
-    $scope.checkIfLoggedIn = function(){
+
+
+    /**
+     * Check if user has logged in
+     */
+    $scope.checkIfLoggedIn = function() {
         storedData = localStorage.getItem('token');
         data = JSON.parse(storedData)
-        if(data && data.token){
+        if (data && data.token) {
             $state.go('profile.home')
         }
     }
 
-
-    $scope.searchUser = function(key, value){
+    /**
+     * Check if user already exists
+     */
+    $scope.searchUser = function(key, value) {
         var params = {
             key: key,
             value: value
@@ -27,15 +33,18 @@ studentCompanionApp.controller('registerCtrl', ['$scope', 'apiService', '$uibMod
         console.log(params, $scope.searchFilter)
         apiService.getUserDetails(params).then(function(response) {
             $scope.validations[key] = false
-          }, function(response) {
+        }, function(response) {
             $scope.validations[key] = true
-          });
+        });
 
-        
+
 
     }
 
-    $scope.register = function(){
+    /**
+     * Get the user registered
+     */
+    $scope.register = function() {
         params = {
             username: $scope.userName,
             password: $scope.password,
@@ -48,24 +57,18 @@ studentCompanionApp.controller('registerCtrl', ['$scope', 'apiService', '$uibMod
         apiService.registerUser(params).then(function(response) {
             toastr.success("You were registered", 'Success');
             $state.go('public.login')
-          }, function(response) {
+        }, function(response) {
             console.log(response)
             var error_msg = ""
-            Object.keys(response.data).forEach(function (key) { 
+            Object.keys(response.data).forEach(function(key) {
                 var value = response.data[key]
-                
-                error_msg += (key+ " : ") 
+
+                error_msg += (key + " : ")
                 error_msg += value.join()
                 error_msg += ";\n"
             })
-
-            
-              
-
-
-              
             toastr.error(error_msg, 'Registration Failed!');
-          });
+        });
     }
 
     $scope.checkIfLoggedIn()

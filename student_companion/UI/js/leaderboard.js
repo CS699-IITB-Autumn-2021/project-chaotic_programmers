@@ -10,16 +10,18 @@ studentCompanionApp.controller('leaderboardCtrl', ['$scope', 'apiService', '$uib
     $scope.timePeriod = $scope.periodOptions[0]
     $scope.criteria = $scope.rankCriteria[0]
 
-
-    $scope.getData = function(){
+    /**
+     * Get Leaderboard Data
+     */
+    $scope.getData = function() {
         var params = {
             period: $scope.timePeriod,
             criteria: $scope.criteria
         }
-        
+
         apiService.getLeaderboard(params).then(function(response) {
             $scope.leaderboard = response;
-        }); 
+        });
     }
 
     $scope.getData()

@@ -11,11 +11,11 @@ studentCompanionApp.config(function(RestangularProvider) {
     }
 
 });
-
+/**
+ * Facilitates backend and frontend communication
+ */
 studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) {
 
-    // this is service object with list of methods in it
-    // this object will be used by controller
 
 
     var service = {
@@ -42,84 +42,179 @@ studentCompanionApp.factory('apiService', ['Restangular', function(Restangular) 
     };
 
 
-    // get examples from server by using Restangular
+    /**
+     * Useful for getting all models when testing
+     * @returns {list}
+     */
     function getTestModels() {
         return Restangular.all('test').getList();
     }
 
-    // get example with given id from server by using Restangular
+
+    /**
+     * Useful for getting specific models when testing
+     * @param {number} id Specific id
+     * @returns {list}
+     */
     function getTestModel(id) {
         return Restangular.one('test', id).get();
     }
 
+    /**
+     * Gets all deck names
+     * @returns {list}
+     */
     function getDeckNames() {
         return Restangular.all('decks').getList();
     }
 
+    /**
+     * Gets currently logged in user
+     * @returns {list}
+     */
     function getCurrentUser() {
         return Restangular.one('get_logged_in_user').get()
     }
 
+    /**
+     * Gets user details    
+     * @param {params} id Dictionary of User id
+     * @returns {list}
+     */
     function getUserDetails(params) {
         return Restangular.one('user').customGET("", params)
     }
 
+    /**
+     * Sends details of new friend to add it as friend
+     * @param {params} id Dictionary of User id and friend id
+     * @returns {list}
+     */
     function addFriend(params) {
         return Restangular.one('friends').customPOST(params, 'new/')
     }
 
+    /**
+     * Gets list of friends
+     * @param {params} id Dictionary of User id
+     * @returns {list}
+     */
     function getFriends(params) {
         return Restangular.one('friends').customGET("list", {})
     }
 
+    /**
+     * Gets leaderboard details in provided sorted order
+     * @param {params} id Dictionary of ordering requirements
+     * @returns {list}
+     */
     function getLeaderboard(params) {
         return Restangular.one('leaderboard').customGET("", params)
     }
 
+    /**
+     * Sends deck name to back end to create a new deck
+     * @param {params} id Dictionary of deckname
+     * @returns {list}
+     */
     function createDeck(params) {
         return Restangular.one('decks').customPOST(params, "new/")
     }
 
+    /**
+     * Sends card details to backend to create new flashcard and save in database
+     * @param {params} id Dictionary of card title, question and answer
+     * @returns {list}
+     */
     function createCard(params) {
         return Restangular.one('card').customPOST(params, "new/")
     }
 
+    /**
+     * Sends cardid and eck id to save start time
+     * @param {params} id Dictionary of cardid ,deckid
+     * @returns {list}
+     */
     function SaveStartCard(params) {
         return Restangular.one('card').customPOST(params, "savestart/")
     }
 
+    /**
+     * Sends card id and deck id to calculate total time taken and also calculate next scheduled time
+     * @param {params} id Dictionary of cardid, deckid and difficulty level
+     * @returns {list}
+     */
     function SaveFinishCard(params) {
         return Restangular.one('card').customPOST(params, "savefinish/")
     }
 
+    /**
+     * Sends deck id to backend to delete deck
+     * @param {params} id Dictionary of cardid
+     * @returns {list}
+     */
     function deleteCard(params) {
         return Restangular.one('card').customPOST(params, "delete/")
     }
 
+    /**
+     * Sends new  card info to backend for updation
+     * @param {params} id Dictionary of cardid and new card details
+     * @returns {list}
+     */
     function EditCard(params) {
         return Restangular.one('card').customPOST(params, "edit/")
     }
 
+    /**
+     *  Fetches cards of a specific deck
+     * @param {params} id Dictionary of deck id
+     * @returns {list}
+     */
     function fetchCardsofDeck(params) {
         return Restangular.one('card').customGET("", params);
     }
 
+    /**
+     * Sends deck id to get cards to be revised today
+     * @param {params} id Dictionary of deck id
+     * @returns {list}
+     */
     function fetchTodaysCardsofDeck(params) {
         return Restangular.one('card').customGET("revise/", params);
     }
 
+    /**
+     * Redicts so that user is logged in
+     * @param {params} id Dictionary of user details
+     * @returns {list}
+     */
     function loginUser(params) {
         return Restangular.one('login/').customPOST(params, "")
     }
 
+    /**
+     * Send new user details to be saved
+     * @param {params} id Dictionary of new user details
+     * @returns {list}
+     */
     function registerUser(params) {
         return Restangular.one('register/').customPOST(params, "")
     }
 
+    /**
+     * Asks to log out user
+     * @returns {list}
+     */
     function logoutUser() {
         return Restangular.one('logout/').customPOST("", "")
     }
 
+    /**
+     * Sends deck id and friend id to whom the deck is to be shared with
+     * @param {params} id Dictionary of odeck id and friend id
+     * @returns {list}
+     */
     function shareDeckToFriend(params) {
         return Restangular.one('sharedeck/').customPOST(params, '')
     }
