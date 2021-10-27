@@ -238,6 +238,7 @@ class SaveFinish(APIView):
             next_scheduled_at=now+gap_in_revision+gap7days
         else:
             next_scheduled_at=now+gap_in_revision+gap3days
+        # Chaining Filters: https://stackoverflow.com/questions/8164675/chaining-multiple-filter-in-django-is-this-a-bug
         FlashcardUser.objects.filter(pk=id_of_flashcarduser).update(last_opened=datetime.datetime.now(),last_time_taken=last_time_taken,next_scheduled_at=next_scheduled_at,)
         activity_objects = ActivityMonitor.objects.filter(user=request.user)
         activity_serializer = ActivityMonitorSerializer(activity_objects, many=True)
