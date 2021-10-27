@@ -36,7 +36,7 @@ Building a website to create a study tool which uses flashcards and timed revisi
    11. **Sphinx** (For Documentation)
 
 
-### List of deliverables (tick mark those which are complete):
+### List of deliverables:
 
     Login page for user to login ✓
     Facility to create, edit and delete flashcards ✓
@@ -49,11 +49,11 @@ Building a website to create a study tool which uses flashcards and timed revisi
     Show current progress of cards for the user and user's friends ✓
 
 
-### Hardware/Software Requirements.
+### Hardware/Software Requirements
 
 
 
-### Well explained, “how to operate”.
+### Well explained, “how to operate”
 
 From Login page students can enter their credentials and login to the website, if he/she is a new user they can register first by registration page. Once logged in user will be taken to the main page where user can decide whether he/she wants to do revision of a particular subject (fr which he can select course from deck) or wants to do mixed revision of all the courses. User can also check his progress and compare his performance with his frind using leaderboard. User is given the facility to add other user a friend and share flashcards with each other. He can create, edit, or delete his owm flashcards as per his requirement. 
 
@@ -93,6 +93,6 @@ Chaotic Programmers
 
 ### Path to Code Documentation (index.html).
 
-#### Python Documentation Path
-
 [Python Documentation Path](Documentation/PythonDocumentation/Build/html/index.html)
+
+[Javascript Documentation Path] Coming soon
