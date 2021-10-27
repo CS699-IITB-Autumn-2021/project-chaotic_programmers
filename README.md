@@ -89,5 +89,7 @@ Chaotic Programmers
 11. Documentation - Abisek R K and Sakharam
 
 ### Path to Code Documentation (index.html).
+
 #### Python Documentation Path
-[Python Documentation Path](Documentation/Python Documentation/build/html/index.html)
+
+[Python Documentation Path](Documentation/PythonDocumentation/build/html/index.html)
