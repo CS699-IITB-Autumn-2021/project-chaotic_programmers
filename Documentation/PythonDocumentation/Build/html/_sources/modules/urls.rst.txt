@@ -1,6 +1,0 @@
-URLs
-=======
-
-.. automodule:: api.urls
-   :members:
-   :undoc-members:
