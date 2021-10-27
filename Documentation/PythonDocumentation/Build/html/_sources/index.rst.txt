@@ -12,6 +12,8 @@ Welcome to Student Companion's documentation!
    
    modules/all-about-me.rst
    
+   modules/all-about-project.rst
+   
    modules/views.rst
    
    modules/models.rst
