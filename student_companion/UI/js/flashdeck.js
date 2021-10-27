@@ -3,8 +3,9 @@ var studentCompanionApp = angular.module('studentCompanionApp');
 
 
 studentCompanionApp.controller('flashdeckCtrl', ['$scope', 'apiService', '$uibModal', '$state', function($scope, apiService, $uibModal, $state) {
-
+    //Using $Scope https://stackoverflow.com/questions/37193102/get-ng-model-in-scope-variable-angularjs
     $scope.saveDeck = function() {
+        // Checbox ticked or not :https://makitweb.com/check-if-checkbox-is-checked-or-not-with-angularjs/ 
         custom_required = 0
         const deck_ids = []
         if ($scope.custom_selected) {

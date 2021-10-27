@@ -1,9 +1,11 @@
 
+<!--Using NGCLICK and NG-SHOW: https://stackoverflow.com/questions/23035647/angularjs-ng-click-and-ng-show-to-show-a-div-->
 <div ng-show="!cardVisible">
 <h3 style="text-align: center; padding-top: 1%; padding-bottom: 1%;"> Existing Decks</h3>
 <p style="text-align: center;" ng-if="decks && decks.length < 1">You currently don't have any decks </p>
 <div class="container">
    <main class="grid">
+   <!-- Using NG-REPEAT: https://stackoverflow.com/questions/36880279/how-to-get-the-value-of-ng-repeat-input-angularjs-->
       <article ng-repeat="eachdeck in decks  track by $index">
       <div class="text">
          <h3>{{eachdeck.title}}</h3>
@@ -16,7 +18,7 @@
 </div>
 
 
-
+<!--Show hide div: https://stackoverflow.com/questions/44260270/how-to-show-hide-div-in-angularjs-->
 
 <!-- Flip reference: https://www.w3schools.com/howto/howto_css_flip_card.asp -->
 <div ng-show = "cardVisible" id="ShowFlashCard">
