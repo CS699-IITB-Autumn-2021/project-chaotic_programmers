@@ -9,26 +9,54 @@ from django.contrib.auth.models import AbstractUser
 
 # This code is triggered whenever a new user has been created and saved to the database
 @receiver(post_save, sender = settings.AUTH_USER_MODEL)
+
+# Reference: https://www.django-rest-framework.org/api-guide/authentication/
 def create_auth_token(sender, instance = None, created = False, **kwargs):
+    """
+        Description:
+            Every user to have an automatically generated Token
+
+        Arguments:
+            sender- information of the sender (sender object)
+
+        Returns:
+            Nothing
+        """
     if created:
         Token.objects.create(user = instance)
 
 
 class ScUser(AbstractUser):
+    """
+        Description:
+            Class for customizing authentication model
+    """
     relations = models.ManyToManyField(settings.AUTH_USER_MODEL, blank = True)
 
 
 class FlashDeck(models.Model):
+    """
+        Description:
+            Model for decks
+    """
     title = models.CharField(max_length=100, blank=False, default='')
     owner = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     
     class Meta:
+        """
+        Description:
+            Mentions ordering
+        """
         ordering= ['title']
 
 
 class Flashcard(models.Model):
+    """
+        Description:
+            Model for flashcards that contains flashcard details and its accountability
+    """
     title = models.CharField(max_length=100, blank = False, default='')
     question = models.CharField(max_length=100, blank = False, default='')
     answer = models.CharField(max_length=100, blank = False, default='')
@@ -40,6 +68,10 @@ class Flashcard(models.Model):
 
 
 class FlashcardUser(models.Model):
+    """
+        Description:
+            Model that Saves history of revisions for every flashcard per user
+    """
     flashcard = models.ForeignKey(Flashcard, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     last_opened = models.DateTimeField(blank = True, null= True)
@@ -51,12 +83,20 @@ class FlashcardUser(models.Model):
 
 
 class FlashDeckUser(models.Model):
+    """
+        Description:
+            Model for dmapping of decks and users
+    """
     flashdeck = models.ForeignKey(FlashDeck, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
 
 class ActivityMonitor(models.Model):
+    """
+        Description:
+            Model that holds statistics of revision and time taken for every logged-in instance
+    """
     date = models.DateTimeField()
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     time_spent = models.IntegerField(default=0)
