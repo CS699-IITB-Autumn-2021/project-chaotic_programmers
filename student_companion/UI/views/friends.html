@@ -1,1 +1,86 @@
-<p> This is the place for friends page</p>
+<h3 style="text-align: center; padding-top: 1%; padding-bottom: 1%;"> Search Friends</h3>
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-6">
+            <div class="input-group  input-group-sm">
+                <label class="input-group-text" for="searchFilter">Search By: </label>
+                <select class="form-select" ng-model="searchFilter" id ="searchFilter">
+                    <option ng-repeat="x in searchOptions">{{x}}</option>
+                </select>
+              </div>
+        </div>
+
+        <div class="col-6">
+            <div class="input-group  input-group-sm">
+                <input type="text" class="form-control" placeholder="Enter {{searchFilter}}" aria-label="Last name" ng-model="searchQuery">
+                
+                <div class="input-group-append">
+                    <button ng-disabled="!searchFilter || !searchQuery" class="btn btn-primary" ng-click="searchFriend()">Search </button>
+                  </div>
+              </div>
+        </div>
+    </div>
+
+</div>
+
+<h3 style="text-align: center; padding-top: 1%; padding-bottom: 1%;"> Your friends</h3>
+<p style="text-align: center;" ng-if="friends && friends.length < 1">You currently don't have any friends here.. </p>
+<div class="container">
+    <main class="grid">
+      <article ng-repeat="friend in friends track by $index">
+        <div class="text">
+          <h3>{{friend.first_name}}  {{friend.last_name}}  </h3>
+          <p> {{friend.username}}</p>
+          <!-- <a href="https://codepen.io/collection/XdWJOQ/" class="btn btn-primary btn-block">Here's why</a> -->
+        </div>
+      </article>
+      
+    </main>
+  </div>
+
+<!-- <ul class="SG">
+  <li class="sgLi">
+    <div class="box">
+    <h3>Style disc</h3>
+    <ul class="df">
+    <li>Friday</li>
+    <li>Monday</li>
+    <li>Saturday</li>
+    <li>Wednesday</li>
+    </ul> 
+  </div>
+ </li> 
+</ul>
+</div> -->
+
+<!-- Run Pen -->
+
+
+
+
+<!-- Add Friend Popup section -->
+
+
+
+<!--  -->
+<script type="text/ng-template" id="add_friend_popup.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Search Results</h3>
+    </div>
+    <div class="modal-body">
+        <div ng-if="friend && friend.status"> 
+            <p>Sorry no user found for your query !! Please try changing the username/email</p>
+        </div>
+
+        <div ng-if="friend && !friend.status"> 
+            <p> Do you want to Add {{friend.first_name}}  {{friend.last_name}} to your list of friends ?</p>
+        </div>
+        
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="ok()">Yes</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</script>

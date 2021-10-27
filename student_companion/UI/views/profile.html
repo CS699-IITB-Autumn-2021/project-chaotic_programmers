@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">    
+<a ui-sref="profile.home"><img src="https://i.ibb.co/v13TLwP/Student-Companion-Logo.png" height="40" width="40" alt="Student-Companion-Logo" border="0"></a>
+
+  <a class="navbar-brand" ui-sref="profile.home"> &nbspStudent Companion</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" ui-sref="profile.home">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" ui-sref="profile.friends">Friends</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" ui-sref="profile.leaderboard">LeaderBoard</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          FlashCards
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" ui-sref="profile.flashdecks">Create or View</a>
+          <a class="dropdown-item" ui-sref="profile.flashcards.view">Revise</a>
+        </div>
+      </li>
+    
+      <li class="nav-item dropdown" ng-if="user">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{user.firstName}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" ng-click="logout()">Logout</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div ui-view> </div>

@@ -1,0 +1,77 @@
+	<div class="container">
+		<div class="d-flex justify-content-center ">
+			<div class="user_card">
+				<div class="d-flex justify-content-center">
+					<!-- <div class="brand_logo_container"> -->
+						<h3> Student Companion </h3>
+					<!-- </div> -->
+				</div>
+				<div class="d-flex justify-content-center form_container">
+					<form name="registerForm">
+						<div class="input-group mb-3">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-user"></i></span>
+							</div>
+							<input type="text" name="" class="form-control input_user" ng-class = "(userName && validations.username ? 'is-valid' : 'is-invalid')" value="" placeholder="username" ng-model="userName" required ng-blur="searchUser('username', userName)">
+							<div class="invalid-feedback">
+								Username already taken
+							</div>
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-key"></i></span>
+							</div>
+							<input type="password" name="" class="form-control input_pass" value="" placeholder="password" ng-model="password">
+						</div>
+
+                        <div class="input-group mb-3">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-key"></i></span>
+							</div>
+							<input type="password" name="" class="form-control input_pass" ng-class = "(password != confirmPassword ? 'is-invalid' : 'is-valid')" value="" placeholder="Confirm password" ng-model="confirmPassword">
+							<div class="invalid-feedback" ng-if="emailId">
+								Passwords should match
+							</div>
+						</div>
+
+
+                        <div class="input-group mb-3">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-envelope"></i></span>
+							</div>
+							<input type="email" name="" class="form-control input_pass" ng-class = "(emailId && validations.email ? 'is-valid' : 'is-invalid')" value="" placeholder="email" ng-model="emailId" ng-blur="searchUser('email', emailId)" required> 
+							<div class="invalid-feedback" ng-if="emailId">
+								Email already taken
+							</div>
+						</div>
+
+
+                        <div class="input-group mb-3">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-user"></i></span>
+							</div>
+							<input type="text" name="firstName" class="form-control input_pass" ng-class = "(!firstName ? 'is-invalid' : 'is-valid')" value="" placeholder="first name" ng-model="firstName" required>
+							<div class="invalid-feedback">
+								First name is mandatory
+							</div>
+						</div>
+
+                        <div class="input-group mb-3">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-user"></i></span>
+							</div>
+							<input type="text" name="" class="form-control input_pass" value=""ng-class = "(!lastName ? 'is-invalid' : 'is-valid')" placeholder="last name" ng-model="lastName" required>
+							<div class="invalid-feedback">
+								Last name is mandatory
+							</div>
+						</div>
+						
+						<div class="d-flex justify-content-center mt-3 login_container">
+				 		<button name="button" class="btn login_btn" type="submit" ng-click="register()" ng-disabled="registerForm.$invalid">Register</button>
+				   </div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+

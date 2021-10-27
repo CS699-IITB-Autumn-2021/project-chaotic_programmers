@@ -1,0 +1,78 @@
+
+<div>
+        <button type="button" class="fas fa-folder-plus fa-lg" data-toggle="modal" data-target="#exampleModal"> New
+          </button>
+          
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Create New Deck</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" name="" class="form-control input_user" value="" placeholder="Enter Deck name" ng-model="deckName">
+                      <div class="form-check">
+                  <input class="form-check-input" type="checkbox" ng-model="custom_selected"  value="" id="flexCheckDefault"  >
+                  
+                  <label class="form-check-label" for="flexCheckDefault">
+                  From already created decks
+                  </label>
+                  <div class="form-group" ng-show="custom_selected">
+                     <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="eachdeck in decks">
+                           <input class="form-check-input me-1"  ng-model="eachdeck.selected" type="checkbox" value="" aria-label="...">
+                           {{eachdeck.title}}
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveDeck()">Create</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <h3 style="text-align: center; padding-top: 1%; padding-bottom: 1%;"> Existing Decks</h3>
+          <p style="text-align: center;" ng-if="decks && decks.length < 1">You currently don't have any decks </p>
+          <div class="container">
+              <main class="grid">
+                <article ng-repeat="deck in decks  track by $index">
+                  <div class="text">
+                    <h3>{{deck.title}}</h3>
+                    <p> {{friend.username}}</p>
+                    <a class="far fa-eye" ng-click="viewDeck(deck.id)">View</a>
+                    <a class="fas fa-share-alt" ng-click="shareDeck(deck.id)">Share</a>
+                  </div>
+                </article>
+                
+              </main>
+            </div>
+
+</div>
+
+
+<script type="text/ng-template" id="share_deck.html">
+  <div class="modal-header">
+      <h3 class="modal-title">Choose friend</h3>
+  </div>
+  <div class="modal-body">
+    <div class="input-group  input-group-sm">
+      <label class="input-group-text" for="searchFilter">Username: </label>
+      <select class="form-select" ng-model="friend_id" id ="searchFilter">
+          <option ng-repeat="x in friends">{{x.username}}</option>
+      </select>
+    </div>
+      
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-primary" type="button" ng-click="ok()">Yes</button>
+      <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+  </div>
+</script>

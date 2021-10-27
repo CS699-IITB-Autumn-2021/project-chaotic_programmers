@@ -1,1 +1,47 @@
-<p> Leaderboard page</p>
+<h3 style="text-align: center; padding-top: 1%; padding-bottom: 1%;">Top performers</h3>
+<div class="container">
+    <div class="row"> 
+        <div class="col-6">
+            <div class="input-group  input-group-sm">
+                <label class="input-group-text" for="period">Period </label>
+                <select class="form-select" ng-model="timePeriod" id ="period" ng-change="getData()">
+                    <option ng-repeat="x in periodOptions">{{x}}</option>
+                </select>
+              </div>
+        </div>
+
+        <div class="col-6">
+            <div class="input-group  input-group-sm">
+                <label class="input-group-text" for="criteria">Criteria </label>
+                <select class="form-select" ng-model="criteria" id ="criteria" ng-change="getData()">
+                    <option ng-repeat="x in rankCriteria">{{x}}</option>
+                </select>
+              </div>
+        </div>
+
+    </div>
+
+    <div class="row"> 
+        <div>
+            <table class="table table-hover table-striped text-centre table-bordered table-dark">
+                <thead class="thead-dark">
+                    <tr>
+                        <th> Rank</th>
+                        <th>Username</th>
+                        <th> Cards seen</th>
+                        <th> Revision Time(in secs)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat = "entry in leaderboard track by $index">
+                        <td> {{$index + 1}}</td>
+                        <td>{{entry.username}}</td>
+                        <td>{{entry.total_cards}}</td>
+                        <td>{{entry.total_time}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

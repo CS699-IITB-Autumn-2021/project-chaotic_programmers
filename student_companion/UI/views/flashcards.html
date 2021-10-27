@@ -1,3 +1,73 @@
-<p>Flashcards Page </p>
 
-<div ui-view></div>
+<div ng-show="!cardVisible">
+<h3 style="text-align: center; padding-top: 1%; padding-bottom: 1%;"> Existing Decks</h3>
+<p style="text-align: center;" ng-if="decks && decks.length < 1">You currently don't have any decks </p>
+<div class="container">
+   <main class="grid">
+      <article ng-repeat="eachdeck in decks  track by $index">
+      <div class="text">
+         <h3>{{eachdeck.title}}</h3>
+         <a class="far fa-eye" ng-click="CardShow();selectedDeckForRevision($index)">Revise</a>
+      </div>
+      </article>
+      
+   </main>
+</div>
+</div>
+
+
+
+
+<!-- Flip reference: https://www.w3schools.com/howto/howto_css_flip_card.asp -->
+<div ng-show = "cardVisible" id="ShowFlashCard">
+<div class="text-center flip-card" >
+   <div class="test" ng-class="{'is-flipped': cardFlipped == true}">
+      <div class="progress" style="height: 10px;">
+         <div class="progress-bar bg-success" role="progressbar" ng-style="displayPercentage" aria-valuenow={{cards_revised_percentage}} aria-valuemin="0" aria-valuemax="100">{{cards_revised_percentage}}%</div>
+      </div>
+      <h5 class="card-title" >{{cardsofDeck[current_card_index].title}}</h5>
+      <a href="#" class="fas fa-sync-alt" ng-click="BackShow(); cardFlipped = !cardFlipped" >Show/Hide Answer</a>
+
+      <div class="flip-card-inner">
+         <div class="flip-card-front">
+            <div class="card">
+               <div class="card-header">
+                  <h5 class="card-title">Front</h5>
+               </div>
+
+               <div class="card-body">
+                  <p class="card-text">{{cardsofDeck[current_card_index].question}}</p>
+               
+               </div>
+
+            </div>
+         </div>
+
+
+         <div class="flip-card-back">
+            <div class="card">
+               <div class="card-header">
+                  <h5 class="card-title">Back</h5>
+               </div>
+
+               <div class="card-body">
+                  <p class="card-text">{{cardsofDeck[current_card_index].answer}}</p>
+            <a href="#" class="btn btn-success" ng-click="BackHide();shownextCard(1);displayPercentage={'width': cards_revised_percentage + '%'}; cardFlipped = !cardFlipped">EASY</a>
+            <a href="#" class="btn btn-warning" ng-click="BackHide();shownextCard(2);displayPercentage={'width': cards_revised_percentage + '%'}; cardFlipped = !cardFlipped">MEDIUM</a>
+            <a href="#" class="btn btn-danger" ng-click="BackHide();shownextCard(3);displayPercentage={'width': cards_revised_percentage + '%'};cardFlipped = !cardFlipped">HARD</a>
+               </div>
+
+            </div>
+      <div class="flip-card-back">
+         
+         
+      </div>
+      </div>
+   </div>
+
+</div>
+</div>
+
+
+<div ui-view>
+</div>

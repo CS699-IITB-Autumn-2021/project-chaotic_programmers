@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'api.apps.ApiConfig',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -83,15 +84,31 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'student_companion',
-        'USER': 'root',
-        'PASSWORD': '',
+        'USER': 'django',   
+        'PASSWORD': 'student',
         'HOST': 'localhost',
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'student_companion',
+#         'USER': 'root',   
+#         'PASSWORD': 'student',
+#         'HOST': '',
+#     }
+# }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -136,3 +153,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ANGULAR_APP_DIR = os.path.join(BASE_DIR, "UI")
 STATICFILES_DIRS = [os.path.join(ANGULAR_APP_DIR), ]
+AUTH_USER_MODEL = "api.ScUser" 
