@@ -51,6 +51,16 @@ Building a website to create a study tool which uses flashcards and timed revisi
 
 ### Hardware/Software Requirements
 
+#### Hardware: ####
+
+Any modern hardware that can run python programs and latest version of browsers.
+
+#### Software: ####
+
+1. Python - 3
+2. Djangon - 3.2.7
+3. djangorestframework - 3.12.4
+4. django-spa - 0.3.5
 
 
 ### How to operate
