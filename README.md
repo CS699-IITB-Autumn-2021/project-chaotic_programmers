@@ -13,24 +13,26 @@ Building a website to create a study tool which uses flashcards and timed revisi
 
 ### List of features:
 
-Use of Flashcards for Better revision
-Flashcard sharing to increase subject knowledge
-Leaderboard to have a friendly competition with friends
-Facility to create, edit, and delete flashcards to customize revision
+1. Use of Flashcards for Better revision
+2. Flashcard sharing to increase subject knowledge
+3. Leaderboard to have a friendly competition with friends
+4. Facility to create, edit, and delete flashcards to customize revision
 
 <img width="1024" alt="student_companion_fc" src="https://user-images.githubusercontent.com/88259695/139014658-c53fd033-7c17-4164-a64b-f39c7de85a46.png">
 
 
-### Technology Stack (highlight ones learnt in CS699):
+### Technology Stack:
 
-   Django (For Backend)
-   *Python*
-   *MySql* (For storing and managing data)
-   AngularJS (To make UI Responsive)
-   HTML,CSS
-   Github 
-   *Latex* (For PPT)
-   Sphinx (For Documentation)
+   Django
+   **Python**
+   **Database** [MySql]
+   AngularJS
+   **HTML**
+   **CSS**
+   **Bootstrap**
+   **Github**
+   **Latex** (For PPT)
+   **Sphinx** (For Documentation)
 
 
 ### List of deliverables (tick mark those which are complete):
