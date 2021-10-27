@@ -106,6 +106,6 @@ Chaotic Programmers
 
 ### Path to Code Documentation (index.html).
 
-[Python Documentation Path](Documentation/PythonDocumentation/Build/html/index.html)
+[Python Documentation Path](Documentation/PythonDocumentation/Build/html/index.html) <--- Contains  illustration
 
 [Javascript Documentation Path](Documentation/JavaScriptDocumentation/index.html)
