@@ -88,4 +88,6 @@ Chaotic Programmers
 10. Show current progress of cards for the user and user’s friends -Sakharam
 11. Documentation - Abisek R K and Sakharam
 
-Path to Code Documentation (index.html).
+### Path to Code Documentation (index.html).
+#### Python Documentation Path
+[Documentation/Python Documentation/_build/html/index.html](Documentation/Python Documentation/_build/html/index.html)
