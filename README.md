@@ -23,16 +23,17 @@ Building a website to create a study tool which uses flashcards and timed revisi
 
 ### Technology Stack:
 
-   Django
-   **Python**
-   **Database** [MySql]
-   AngularJS
-   **HTML**
-   **CSS**
-   **Bootstrap**
-   **Github**
-   **Latex** (For PPT)
-   **Sphinx** (For Documentation)
+   1. Django
+   2. **Python**
+   3. **Database** [MySql]
+   4. AngularJS
+   5. **HTML**
+   6. **CSS**
+   7. **Javascript**
+   8. **Bootstrap**
+   9. **Github**
+   10. **Latex** (For PPT)
+   11. **Sphinx** (For Documentation)
 
 
 ### List of deliverables (tick mark those which are complete):
