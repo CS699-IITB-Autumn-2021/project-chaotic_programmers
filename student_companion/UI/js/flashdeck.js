@@ -246,9 +246,9 @@ studentCompanionApp.controller('shareDeckCtrl', ['$scope', 'apiService', '$modal
         }
         console.log(params)
         apiService.shareDeckToFriend(params).then(function(response) {
-            toastr.success("Added to friend list", 'Success');
+            toastr.success("Shared with friend", 'Success');
         }, function(response) {
-            toastr.error("No such user/ friend already added", 'Failed to add friend');
+            toastr.error("Cannot share the deck at this moment", 'Failed to share deck with friend');
         });
 
     }
