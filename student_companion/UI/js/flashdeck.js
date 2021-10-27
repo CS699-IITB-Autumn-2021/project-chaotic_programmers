@@ -4,6 +4,10 @@ var studentCompanionApp = angular.module('studentCompanionApp');
 
 studentCompanionApp.controller('flashdeckCtrl', ['$scope', 'apiService', '$uibModal', '$state', function($scope, apiService, $uibModal, $state) {
     //Using $Scope https://stackoverflow.com/questions/37193102/get-ng-model-in-scope-variable-angularjs
+
+    /**
+     * Saves Deck
+     */
     $scope.saveDeck = function() {
         // Checbox ticked or not :https://makitweb.com/check-if-checkbox-is-checked-or-not-with-angularjs/ 
         custom_required = 0
@@ -17,7 +21,6 @@ studentCompanionApp.controller('flashdeckCtrl', ['$scope', 'apiService', '$uibMo
                     }
                 }
             });
-            console.log(deck_ids);
         }
         var params = {
             title: $scope.deckName,
@@ -33,23 +36,34 @@ studentCompanionApp.controller('flashdeckCtrl', ['$scope', 'apiService', '$uibMo
         });
     }
 
+    /**
+     * Fetches Decks
+     */
     $scope.getDecks = function() {
         apiService.getDeckNames().then(function(response) {
             $scope.decks = response;
         });
     }
 
+    /**
+     * Shows all decks
+     */
     $scope.viewDeck = function(deck_id) {
         $state.go("profile.flashdeck_show", { id: deck_id })
     }
 
+    /**
+     * Shares Deck with friends
+     */
     $scope.shareDeck = function(deck_id) {
         console.log('here at parent')
         $scope.open("lg", deck_id)
     }
 
+    /**
+     * Opens modal for creating new deck
+     */
     $scope.open = function(size, deck_id) {
-
 
         var modalInstance = $uibModal.open({
             animation: false,
@@ -71,11 +85,12 @@ studentCompanionApp.controller('flashdeckCtrl', ['$scope', 'apiService', '$uibMo
 
 
 studentCompanionApp.controller('flashdeckShowCtrl', ['$scope', 'apiService', '$uibModal', '$state', '$stateParams', function($scope, apiService, $uibModal, $state, $stateParams) {
-    console.log('I am here')
-    console.log($stateParams)
+
     $scope.flashDeckId = $stateParams.id
 
-
+    /**
+     * Saves Flashcard
+     */
     $scope.saveCard = function() {
         var params = {
             title: $scope.flashcardTitle,
@@ -91,6 +106,9 @@ studentCompanionApp.controller('flashdeckShowCtrl', ['$scope', 'apiService', '$u
         });
     }
 
+    /**
+     * Fetches all flashcards
+     */
     $scope.getCards = function() {
         params = {
             deck_id: $scope.flashDeckId
@@ -148,6 +166,10 @@ studentCompanionApp.controller('flashdeckShowCtrl', ['$scope', 'apiService', '$u
             }
         });
     }
+
+    /**
+     * Gets specific card
+     */
     $scope.getCard = function(flashcard_id) {
         for (var i = 0; i < $scope.flashcards.length; i++) {
             if ($scope.flashcards[i]["id"] == flashcard_id) {
@@ -161,6 +183,10 @@ studentCompanionApp.controller('flashdeckShowCtrl', ['$scope', 'apiService', '$u
             }
         }
     }
+
+    /**
+     * GSends data to edit card
+     */
     $scope.editCard = function() {
         if (typeof $scope.editflashcardTitle == 'undefined') {
             flashtitle = $scope.currEditFlashcardTitle;
@@ -184,7 +210,6 @@ studentCompanionApp.controller('flashdeckShowCtrl', ['$scope', 'apiService', '$u
             question: flashquestion,
             answer: flashanswer
         }
-        console.log($scope.currEditFlashcardid);
         apiService.EditCard(params).then(function(response) {
             $scope.getCards()
             toastr.success("FlashCard Edited", 'Success');
@@ -193,10 +218,17 @@ studentCompanionApp.controller('flashdeckShowCtrl', ['$scope', 'apiService', '$u
         });
     }
 
+    /**
+     * Gets flashcard details of specific card id
+     */
     $scope.viewCard = function(flashcard_id) {
         $state.go("profile.flashcard_show", { flashcard_id: flashcard_id })
 
     }
+
+    /**
+     * Deletes a flashcard
+     */
     $scope.delCard = function(flashcard_id) {
         params = {
             card_id: flashcard_id
@@ -215,7 +247,6 @@ studentCompanionApp.controller('flashdeckShowCtrl', ['$scope', 'apiService', '$u
 
 studentCompanionApp.controller('flashcardShowCtrl', ['$scope', 'apiService', '$uibModal', '$state', '$stateParams', function($scope, apiService, $uibModal, $state, $stateParams) {
 
-    console.log($stateParams)
 }])
 
 
@@ -223,29 +254,41 @@ studentCompanionApp.controller('flashcardShowCtrl', ['$scope', 'apiService', '$u
 studentCompanionApp.controller('shareDeckCtrl', ['$scope', 'apiService', '$modalInstance', 'deck', '$window', function($scope, apiService, $modalInstance, deck, $window) {
 
 
-    console.log('form share')
     $scope.deckId = deck
 
-
+    /**
+     * Clicking Ok in modal for share deck
+     */
     $scope.ok = function() {
         $modalInstance.dismiss('cancel');
         $scope.share()
     };
 
+
+    /**
+     * Clicking Cancel in modal for share deck
+     */
     $scope.cancel = function() {
         $modalInstance.dismiss('cancel');
     };
 
+
+    /**
+     * Showing friends of the user in modal for share deck
+     */
     apiService.getFriends().then(function(response) {
         $scope.friends = response;
     });
 
+
+    /**
+     * Clicking Share in modal for share deck
+     */
     $scope.share = function() {
         var params = {
             friend_id: $scope.friend_id,
             deck_id: $scope.deckId
         }
-        console.log(params)
         apiService.shareDeckToFriend(params).then(function(response) {
             toastr.success("Shared with friend", 'Success');
         }, function(response) {

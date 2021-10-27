@@ -1,0 +1,4629 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset='utf-8'>
+  <title>  | Documentation</title>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link href='assets/bass.css' rel='stylesheet'>
+  <link href='assets/style.css' rel='stylesheet'>
+  <link href='assets/github.css' rel='stylesheet'>
+  <link href='assets/split.css' rel='stylesheet'>
+</head>
+<body class='documentation m0'>
+    <div class='flex'>
+      <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
+        <div class='py1 px2'>
+          <h3 class='mb0 no-anchor'></h3>
+          <div class='mb1'><code></code></div>
+          <input
+            placeholder='Filter'
+            id='filter-input'
+            class='col12 block input'
+            spellcheck='false'
+            autocapitalize='off'
+            autocorrect='off'
+            type='text' />
+          <div id='toc'>
+            <ul class='list-reset h5 py1-ul'>
+              
+                
+                <li><a
+                  href='#factory'
+                  class="">
+                  factory
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#gettestmodels'
+                  class="">
+                  getTestModels
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#gettestmodel'
+                  class="">
+                  getTestModel
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getdecknames'
+                  class="">
+                  getDeckNames
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getcurrentuser'
+                  class="">
+                  getCurrentUser
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getuserdetails'
+                  class="">
+                  getUserDetails
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#addfriend'
+                  class="">
+                  addFriend
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getfriends'
+                  class="">
+                  getFriends
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getleaderboard'
+                  class="">
+                  getLeaderboard
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#createdeck'
+                  class="">
+                  createDeck
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#createcard'
+                  class="">
+                  createCard
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#savestartcard'
+                  class="">
+                  SaveStartCard
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#savefinishcard'
+                  class="">
+                  SaveFinishCard
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#deletecard'
+                  class="">
+                  deleteCard
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#editcard'
+                  class="">
+                  EditCard
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#fetchcardsofdeck'
+                  class="">
+                  fetchCardsofDeck
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#fetchtodayscardsofdeck'
+                  class="">
+                  fetchTodaysCardsofDeck
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#loginuser'
+                  class="">
+                  loginUser
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#registeruser'
+                  class="">
+                  registerUser
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#logoutuser'
+                  class="">
+                  logoutUser
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#sharedecktofriend'
+                  class="">
+                  shareDeckToFriend
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#controller'
+                  class="">
+                  controller
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#then'
+                  class="">
+                  then
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#then'
+                  class="">
+                  then
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#then'
+                  class="">
+                  then
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#reloaddecks'
+                  class="">
+                  reloadDecks
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#cardshow'
+                  class="">
+                  CardShow
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#cardhide'
+                  class="">
+                  CardHide
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#backshow'
+                  class="">
+                  BackShow
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#backhide'
+                  class="">
+                  BackHide
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#savedeck'
+                  class="">
+                  saveDeck
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#savedeck'
+                  class="">
+                  saveDeck
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#selecteddeckfromdropdown'
+                  class="">
+                  selectedDeckFromDropDown
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#selecteddeckforrevision'
+                  class="">
+                  selectedDeckForRevision
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#startcard'
+                  class="">
+                  StartCard
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#finishcard'
+                  class="">
+                  FinishCard
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#newflashcard'
+                  class="">
+                  newFlashCard
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#shownextcard'
+                  class="">
+                  shownextCard
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getdecks'
+                  class="">
+                  getDecks
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#viewdeck'
+                  class="">
+                  viewDeck
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#sharedeck'
+                  class="">
+                  shareDeck
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#open'
+                  class="">
+                  open
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#open'
+                  class="">
+                  open
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#savecard'
+                  class="">
+                  saveCard
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getcards'
+                  class="">
+                  getCards
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getcard'
+                  class="">
+                  getCard
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#editcard'
+                  class="">
+                  editCard
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#viewcard'
+                  class="">
+                  viewCard
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#delcard'
+                  class="">
+                  delCard
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#ok'
+                  class="">
+                  ok
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#ok'
+                  class="">
+                  ok
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#cancel'
+                  class="">
+                  cancel
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#cancel'
+                  class="">
+                  cancel
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#share'
+                  class="">
+                  share
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#searchfriend'
+                  class="">
+                  searchFriend
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#add'
+                  class="">
+                  add
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getdata'
+                  class="">
+                  getData
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#checkifloggedin'
+                  class="">
+                  checkIfLoggedIn
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#checkifloggedin'
+                  class="">
+                  checkIfLoggedIn
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#checkifloggedin'
+                  class="">
+                  checkIfLoggedIn
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#login'
+                  class="">
+                  login
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#logout'
+                  class="">
+                  logout
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#searchuser'
+                  class="">
+                  searchUser
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#register'
+                  class="">
+                  register
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#config'
+                  class="">
+                  config
+                  
+                </a>
+                
+                </li>
+              
+            </ul>
+          </div>
+          <div class='mt1 h6 quiet'>
+            <a href='https://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
+          </div>
+        </div>
+      </div>
+      <div id='split-right' class='relative overflow-auto height-viewport-100'>
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='factory'>
+      factory
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Facilitates backend and frontend communication</p>
+
+    <div class='pre p1 fill-light mt0'>factory</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='gettestmodels'>
+      getTestModels
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Useful for getting all models when testing</p>
+
+    <div class='pre p1 fill-light mt0'>getTestModels(): list</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>list</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='gettestmodel'>
+      getTestModel
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Useful for getting specific models when testing</p>
+
+    <div class='pre p1 fill-light mt0'>getTestModel(id: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): list</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>id</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    Specific id
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>list</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getdecknames'>
+      getDeckNames
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Gets all deck names</p>
+
+    <div class='pre p1 fill-light mt0'>getDeckNames(): list</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>list</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getcurrentuser'>
+      getCurrentUser
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Gets currently logged in user</p>
+
+    <div class='pre p1 fill-light mt0'>getCurrentUser(): list</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>list</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getuserdetails'>
+      getUserDetails
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Gets user details</p>
+
+    <div class='pre p1 fill-light mt0'>getUserDetails(params: any, id: params): list</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>params</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>id</span> <code class='quiet'>(params)</code>
+	    Dictionary of User id
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>list</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='addfriend'>
+      addFriend
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Sends details of new friend to add it as friend</p>
+
+    <div class='pre p1 fill-light mt0'>addFriend(params: any, id: params): list</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>params</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>id</span> <code class='quiet'>(params)</code>
+	    Dictionary of User id and friend id
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>list</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getfriends'>
+      getFriends
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Gets list of friends</p>
+
+    <div class='pre p1 fill-light mt0'>getFriends(params: any, id: params): list</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>params</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>id</span> <code class='quiet'>(params)</code>
+	    Dictionary of User id
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>list</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getleaderboard'>
+      getLeaderboard
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Gets leaderboard details in provided sorted order</p>
+
+    <div class='pre p1 fill-light mt0'>getLeaderboard(params: any, id: params): list</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>params</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>id</span> <code class='quiet'>(params)</code>
+	    Dictionary of ordering requirements
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>list</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='createdeck'>
+      createDeck
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Sends deck name to back end to create a new deck</p>
+
+    <div class='pre p1 fill-light mt0'>createDeck(params: any, id: params): list</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>params</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>id</span> <code class='quiet'>(params)</code>
+	    Dictionary of deckname
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>list</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='createcard'>
+      createCard
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Sends card details to backend to create new flashcard and save in database</p>
+
+    <div class='pre p1 fill-light mt0'>createCard(params: any, id: params): list</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>params</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>id</span> <code class='quiet'>(params)</code>
+	    Dictionary of card title, question and answer
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>list</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='savestartcard'>
+      SaveStartCard
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Sends cardid and eck id to save start time</p>
+
+    <div class='pre p1 fill-light mt0'>new SaveStartCard(params: any, id: params): list</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>params</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>id</span> <code class='quiet'>(params)</code>
+	    Dictionary of cardid ,deckid
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>list</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='savefinishcard'>
+      SaveFinishCard
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Sends card id and deck id to calculate total time taken and also calculate next scheduled time</p>
+
+    <div class='pre p1 fill-light mt0'>new SaveFinishCard(params: any, id: params): list</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>params</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>id</span> <code class='quiet'>(params)</code>
+	    Dictionary of cardid, deckid and difficulty level
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>list</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='deletecard'>
+      deleteCard
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Sends deck id to backend to delete deck</p>
+
+    <div class='pre p1 fill-light mt0'>deleteCard(params: any, id: params): list</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>params</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>id</span> <code class='quiet'>(params)</code>
+	    Dictionary of cardid
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>list</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='editcard'>
+      EditCard
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Sends new  card info to backend for updation</p>
+
+    <div class='pre p1 fill-light mt0'>new EditCard(params: any, id: params): list</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>params</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>id</span> <code class='quiet'>(params)</code>
+	    Dictionary of cardid and new card details
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>list</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='fetchcardsofdeck'>
+      fetchCardsofDeck
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Fetches cards of a specific deck</p>
+
+    <div class='pre p1 fill-light mt0'>fetchCardsofDeck(params: any, id: params): list</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>params</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>id</span> <code class='quiet'>(params)</code>
+	    Dictionary of deck id
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>list</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='fetchtodayscardsofdeck'>
+      fetchTodaysCardsofDeck
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Sends deck id to get cards to be revised today</p>
+
+    <div class='pre p1 fill-light mt0'>fetchTodaysCardsofDeck(params: any, id: params): list</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>params</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>id</span> <code class='quiet'>(params)</code>
+	    Dictionary of deck id
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>list</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='loginuser'>
+      loginUser
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Redicts so that user is logged in</p>
+
+    <div class='pre p1 fill-light mt0'>loginUser(params: any, id: params): list</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>params</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>id</span> <code class='quiet'>(params)</code>
+	    Dictionary of user details
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>list</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='registeruser'>
+      registerUser
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Send new user details to be saved</p>
+
+    <div class='pre p1 fill-light mt0'>registerUser(params: any, id: params): list</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>params</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>id</span> <code class='quiet'>(params)</code>
+	    Dictionary of new user details
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>list</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='logoutuser'>
+      logoutUser
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Asks to log out user</p>
+
+    <div class='pre p1 fill-light mt0'>logoutUser(): list</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>list</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='sharedecktofriend'>
+      shareDeckToFriend
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Sends deck id and friend id to whom the deck is to be shared with</p>
+
+    <div class='pre p1 fill-light mt0'>shareDeckToFriend(params: any, id: params): list</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>params</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>id</span> <code class='quiet'>(params)</code>
+	    Dictionary of odeck id and friend id
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>list</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='controller'>
+      controller
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Facilitates flashcard handling</p>
+
+    <div class='pre p1 fill-light mt0'>controller</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='then'>
+      then
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Gets Deck names</p>
+
+    <div class='pre p1 fill-light mt0'>then</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='then'>
+      then
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Showing friends of the user in modal for share deck</p>
+
+    <div class='pre p1 fill-light mt0'>then</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='then'>
+      then
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Get friends of user</p>
+
+    <div class='pre p1 fill-light mt0'>then</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='reloaddecks'>
+      reloadDecks
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Reloads deck</p>
+
+    <div class='pre p1 fill-light mt0'>reloadDecks()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='cardshow'>
+      CardShow
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Shows card</p>
+
+    <div class='pre p1 fill-light mt0'>CardShow()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='cardhide'>
+      CardHide
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Hides card</p>
+
+    <div class='pre p1 fill-light mt0'>CardHide()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='backshow'>
+      BackShow
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Shows back of card</p>
+
+    <div class='pre p1 fill-light mt0'>BackShow()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='backhide'>
+      BackHide
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Shows back of card</p>
+
+    <div class='pre p1 fill-light mt0'>BackHide()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='savedeck'>
+      saveDeck
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Saves deck</p>
+
+    <div class='pre p1 fill-light mt0'>saveDeck()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='savedeck'>
+      saveDeck
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Saves Deck</p>
+
+    <div class='pre p1 fill-light mt0'>saveDeck()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='selecteddeckfromdropdown'>
+      selectedDeckFromDropDown
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Selects deck from dropdown</p>
+
+    <div class='pre p1 fill-light mt0'>selectedDeckFromDropDown(index: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>index</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='selecteddeckforrevision'>
+      selectedDeckForRevision
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Selects deck for revision</p>
+
+    <div class='pre p1 fill-light mt0'>selectedDeckForRevision(index: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>index</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='startcard'>
+      StartCard
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Set start time for card revision</p>
+
+    <div class='pre p1 fill-light mt0'>StartCard(card_id: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>card_id</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='finishcard'>
+      FinishCard
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Calculates time taken and also next scheduled date</p>
+
+    <div class='pre p1 fill-light mt0'>FinishCard(card_id: any, diff: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>card_id</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>diff</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='newflashcard'>
+      newFlashCard
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Creates new flashcard</p>
+
+    <div class='pre p1 fill-light mt0'>newFlashCard()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='shownextcard'>
+      shownextCard
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Shows next flashcard</p>
+
+    <div class='pre p1 fill-light mt0'>shownextCard(difficulty: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>difficulty</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getdecks'>
+      getDecks
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Fetches Decks</p>
+
+    <div class='pre p1 fill-light mt0'>getDecks()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='viewdeck'>
+      viewDeck
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Shows all decks</p>
+
+    <div class='pre p1 fill-light mt0'>viewDeck(deck_id: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>deck_id</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='sharedeck'>
+      shareDeck
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Shares Deck with friends</p>
+
+    <div class='pre p1 fill-light mt0'>shareDeck(deck_id: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>deck_id</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='open'>
+      open
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Opens modal for creating new deck</p>
+
+    <div class='pre p1 fill-light mt0'>open(size: any, deck_id: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>size</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>deck_id</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='open'>
+      open
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Opening Add friend popup</p>
+
+    <div class='pre p1 fill-light mt0'>open(size: any, resp: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>size</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>resp</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='savecard'>
+      saveCard
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Saves Flashcard</p>
+
+    <div class='pre p1 fill-light mt0'>saveCard()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getcards'>
+      getCards
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Fetches all flashcards</p>
+
+    <div class='pre p1 fill-light mt0'>getCards()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getcard'>
+      getCard
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Gets specific card</p>
+
+    <div class='pre p1 fill-light mt0'>getCard(flashcard_id: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>flashcard_id</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='editcard'>
+      editCard
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>GSends data to edit card</p>
+
+    <div class='pre p1 fill-light mt0'>editCard()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='viewcard'>
+      viewCard
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Gets flashcard details of specific card id</p>
+
+    <div class='pre p1 fill-light mt0'>viewCard(flashcard_id: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>flashcard_id</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='delcard'>
+      delCard
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Deletes a flashcard</p>
+
+    <div class='pre p1 fill-light mt0'>delCard(flashcard_id: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>flashcard_id</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='ok'>
+      ok
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Clicking Ok in modal for share deck</p>
+
+    <div class='pre p1 fill-light mt0'>ok()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='ok'>
+      ok
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Clicking on okay to add friends</p>
+
+    <div class='pre p1 fill-light mt0'>ok()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='cancel'>
+      cancel
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Clicking Cancel in modal for share deck</p>
+
+    <div class='pre p1 fill-light mt0'>cancel()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='cancel'>
+      cancel
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Clicking cancel in add friend popup</p>
+
+    <div class='pre p1 fill-light mt0'>cancel()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='share'>
+      share
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Clicking Share in modal for share deck</p>
+
+    <div class='pre p1 fill-light mt0'>share()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='searchfriend'>
+      searchFriend
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Search for friends</p>
+
+    <div class='pre p1 fill-light mt0'>searchFriend()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='add'>
+      add
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Adding friend</p>
+
+    <div class='pre p1 fill-light mt0'>add()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getdata'>
+      getData
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Get Leaderboard Data</p>
+
+    <div class='pre p1 fill-light mt0'>getData()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='checkifloggedin'>
+      checkIfLoggedIn
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Check if user logged in</p>
+
+    <div class='pre p1 fill-light mt0'>checkIfLoggedIn()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='checkifloggedin'>
+      checkIfLoggedIn
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Check if user has logged in</p>
+
+    <div class='pre p1 fill-light mt0'>checkIfLoggedIn()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='checkifloggedin'>
+      checkIfLoggedIn
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Check if user has logged in</p>
+
+    <div class='pre p1 fill-light mt0'>checkIfLoggedIn()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='login'>
+      login
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Log in the user</p>
+
+    <div class='pre p1 fill-light mt0'>login()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='logout'>
+      logout
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Log out the user</p>
+
+    <div class='pre p1 fill-light mt0'>logout()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='searchuser'>
+      searchUser
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Check if user already exists</p>
+
+    <div class='pre p1 fill-light mt0'>searchUser(key: any, value: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>key</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>value</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='register'>
+      register
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Get the user registered</p>
+
+    <div class='pre p1 fill-light mt0'>register()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='config'>
+      config
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Does routing of urls and controlelrs</p>
+
+    <div class='pre p1 fill-light mt0'>config</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+      </div>
+    </div>
+  <script src='assets/anchor.js'></script>
+  <script src='assets/split.js'></script>
+  <script src='assets/site.js'></script>
+</body>
+</html>
