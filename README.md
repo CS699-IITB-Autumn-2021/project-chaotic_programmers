@@ -18,6 +18,9 @@ Flashcard sharing to increase subject knowledge
 Leaderboard to have a friendly competition with friends
 Facility to create, edit, and delete flashcards to customize revision
 
+<img width="1024" alt="student_companion_fc" src="https://user-images.githubusercontent.com/88259695/139014658-c53fd033-7c17-4164-a64b-f39c7de85a46.png">
+
+
 ### Technology Stack (highlight ones learnt in CS699):
 
    Django (For Backend)
@@ -53,11 +56,39 @@ From Login page students can enter their credentials and login to the website, i
 
 
 
+
 ### Primary stakeholders of the product/service built:
 
-Students who have to remember alot (as they study multiple subjects) and do timely recall to remember everything they studied.
-Best used by Medical students/ Linguistic Students
+1. Students
+2. New Language or skill learners
+3. Teachers
+and anyone who has to remember alot and do timely check if they remember everything they learnt/practices.
+Best used by Medical Students/ Linguistic Students
  
 
-Team details along with the contribution.
-Path to Code Documentation (index.html).
+### Team details along with the contribution.
+
+##### Team Details:
+
+Chaotic Programmers  
+213050082:  Gautam Bhavana  
+21q050004:  Abisek R K  
+213050027:  Sakharam Sahadeo Gawade  
+
+##### Contribution:
+1. Database Design and Readme.md - Bhavana Gautam
+2. Login page for user to login - Abisek R K
+3. Facility to create, edit and delete flashcards - Sakharam
+4. Spaced Repetition of flashcards - Sakharam
+5. Adding friends and sharing cards among friends - Abisek R K
+6. A leaderboard among friends - Abisek R K
+7. Decks to organize cards - Abisek R K
+8. Creating a custom decks from existing cards for custom revision -Sakharam
+9. An internal timer to keep cards in front next time during revision ifrecalling too longer - Sakharam
+10. Show current progress of cards for the user and user’s friends -Sakharam
+11. Documentation - Abisek R K and Sakharam
+
+### Path to Code Documentation (index.html).
+#### Python Documentation Path
+[Python Documentation Path](Documentation/Python Documentation/_build/html/index.html)
+[Text](Documentation)
