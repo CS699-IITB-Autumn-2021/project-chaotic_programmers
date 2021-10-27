@@ -30,7 +30,7 @@ Facility to create, edit, and delete flashcards to customize revision
    Sphinx (For Documentation)
 
 
-List of deliverables (tick mark those which are complete):
+### List of deliverables (tick mark those which are complete):
 
     Login page for user to login ✓
     Facility to create, edit and delete flashcards ✓
@@ -43,17 +43,17 @@ List of deliverables (tick mark those which are complete):
     Show current progress of cards for the user and user's friends ✓
 
 
-Hardware/Software Requirements.
+### Hardware/Software Requirements.
 
 
 
-Well explained, “how to operate”.
+### Well explained, “how to operate”.
 
 From Login page students can enter their credentials and login to the website, if he/she is a new user they can register first by registration page. Once logged in user will be taken to the main page where user can decide whether he/she wants to do revision of a particular subject (fr which he can select course from deck) or wants to do mixed revision of all the courses. User can also check his progress and compare his performance with his frind using leaderboard. User is given the facility to add other user a friend and share flashcards with each other. He can create, edit, or delete his owm flashcards as per his requirement. 
 
 
 
-Primary stakeholders of the product/service built:
+### Primary stakeholders of the product/service built:
 
 Students who have to remember alot (as they study multiple subjects) and do timely recall to remember everything they studied.
 Best used by Medical students/ Linguistic Students
