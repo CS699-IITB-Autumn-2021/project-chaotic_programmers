@@ -90,4 +90,4 @@ Chaotic Programmers
 
 ### Path to Code Documentation (index.html).
 #### Python Documentation Path
-[Documentation/Python Documentation/_build/html/index.html](Documentation/Python Documentation/_build/html/index.html)
+[Python Documentation Path](/Documentation/Python Documentation/_build/html/index.html)
